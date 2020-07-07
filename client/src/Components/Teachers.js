@@ -4,39 +4,85 @@ const Teachers = () => {
     const teachers = [
         {
             name: "Per",
-            age: 56,
-            grade: "A"
+            grade: "A",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         },
         {
             name: "Arne",
-            age: 43,
-            grade: "C"
+            grade: "C",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         },
         {
             name: "Kari",
-            age: 51,
-            grade: "B"
+            grade: "B",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         },
         {
             name: "Kåre",
-            age: 32,
-            grade: "D"
+            grade: "D",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         },
         {
             name: "Bob",
-            age: 39,
-            grade: "E"
+            grade: "E",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         },
         {
             name: "Kjersti",
-            age: 59,
-            grade: "A"
+            grade: "A",
+            avatar: "sf",
+            university: "NTNU",
+            courses: [
+
+                { course: "Matte" },
+                { course: "Exphil" }
+
+            ]
         }
     ];
     return (
-        <div title="Forelesere" class="teachers ">
+        <div title="Forelesere" className="teachers ">
             {teachers.map(teacher => (
-                <div class="teacher" key={teacher}>{teacher.name}, {teacher.age}, {teacher.grade}</div>
+                <div className="teacher" key={teacher}>
+                    <img alt="avatar" src="/avatar.png"></img>
+                    <h1>{teacher.name}</h1>
+                    {teacher.courses.map(cours => (<p>{cours.course}</p>))}
+                    <p>{teacher.grade}</p>
+                </div>
             ))}
         </div>
     );
