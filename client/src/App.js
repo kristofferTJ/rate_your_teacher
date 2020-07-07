@@ -1,6 +1,6 @@
 import React from 'react';
-import Teachers from "../Components/Teachers";
-import Navbar from "../Components/Navbar";
+import Teachers from "./Components/Teachers";
+import Navbar from "./Components/Navbar";
 import './App.css';
 
 function App() {

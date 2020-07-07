@@ -1,6 +1,9 @@
 import React from "react";
+//mport apis from "./api";
 
+//await apis.getAllTeachers().then(teachers => { })
 const Teachers = () => {
+    //teachers: []
     const teachers = [
         {
             name: "Per",
