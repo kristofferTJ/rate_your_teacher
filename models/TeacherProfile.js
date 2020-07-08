@@ -77,17 +77,6 @@ const TeacherProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'course',
       },
-      from: {
-        type: Date,
-        required: true,
-      },
-      to: {
-        type: Date,
-      },
-      current: {
-        type: Boolean,
-        default: false,
-      },
     },
   ],
   date: {
