@@ -3,10 +3,10 @@ import React from 'react';
 function App() {
     return (
         <div className="navbar">
-            <a><img alt="logo"></img></a>
-            <a>Om oss</a>
-            <a>Kontakt</a>
-            <a>Logg inn</a>
+            <p><img alt="logo"></img></p>
+            <p>Om oss</p>
+            <p>Kontakt</p>
+            <p>Logg inn</p>
         </div>
     );
 }
