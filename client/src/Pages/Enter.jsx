@@ -1,5 +1,6 @@
 import React from 'react'
 import '../sass/_loginSty.scss'
+import NavBar from '../Components/Navbar'
 
 
 
@@ -21,22 +22,33 @@ class Enter extends React.Component {
     render() {
 
         return (
-            <div className='root-container'>
+            
+            <div>
+                <NavBar />
 
-                <div className='box-controller'>
-                    <div className='controller' onClick={this.showLoginBox.bind(this)}>
-                        Login
+                <div className='root-container'>
+
+                    <div className='box-controller'>
+                        <div className={'controller ' + (this.state.isLoginOpen ? 'selected-controller' : '')} 
+                        onClick={this
+                        .showLoginBox
+                        .bind(this)}>
+                            Logg Inn
+                        </div>
+                        <div className={'controller ' + (this.state.isRegisterOpen ? 'selected-controller' : '')} 
+                        onClick={this
+                        .showRegisterBox
+                        .bind(this)}>
+                            Registrer
+                        </div>
                     </div>
-                    <div className='controller' onClick={this.showRegisterBox.bind(this)}>
-                        Register
+
+                    <div className='box-container'>
+                        {this.state.isLoginOpen && <LoginBox/>}
+                        {this.state.isRegisterOpen && <RegisterBox/>}
                     </div>
+            
                 </div>
-
-                <div className='box-container'>
-                {this.state.isLoginOpen && <LoginBox/>}
-                {this.state.isRegisterOpen && <RegisterBox/>}
-                </div>
-
             </div>
         );
     }
@@ -63,16 +75,16 @@ class LoginBox extends React.Component {
             <div className="box">
 
                 <div className="input-group">
-                    <label htmlFor="username">UserName</label>
-                    <input type='text' name='username' className='login-input' placeholder='username'/>
+                    <label htmlFor="mail">Mail</label>
+                    <input type='text' name='mail' className='login-input' placeholder='Mail'/>
                 </div>
 
                 <div className="input-group">
-                    <label htmlFor="password">Password</label>
-                    <input type='password' name='password' className='login-input' placeholder='password'/>
+                    <label htmlFor="password">Passord</label>
+                    <input type='password' name='password' className='login-input' placeholder='Passord'/>
                 </div>
 
-                <button type='button' className='login-btn' onClick={this.submitLogin.bind(this)}>Login</button>
+                <button type='button' className='login-btn' onClick={this.submitLogin.bind(this)}>Logg Inn</button>
             </div>
         </div>
         );
@@ -94,21 +106,31 @@ class RegisterBox extends React.Component {
         return (
         <div className="inner-container">
             <div className="header">
-                Register
+                Registrer
             </div>
             <div className="box">
 
                 <div className="input-group">
-                    <label htmlFor="username">UserName</label>
-                    <input type='text' name='username' className='login-input' placeholder='username'/>
+                    <label htmlFor="mail">Mail</label>
+                    <input type='text' name='mail' className='login-input' placeholder='Ola.normann@domene.no'/>
                 </div>
 
                 <div className="input-group">
-                    <label htmlFor="password">Password</label>
-                    <input type='password' name='password' className='login-input' placeholder='password'/>
+                    <label htmlFor="Mail">Bekreft mail</label>
+                    <input type='text' name='Mail' className='login-input' placeholder='Gjenta mail'/>
                 </div>
 
-                <button type='button' className='login-btn' onClick={this.submitRegister.bind(this)}>Register</button>
+                <div className="input-group">
+                    <label htmlFor="password">Passord</label>
+                    <input type='password' name='password' className='login-input' placeholder='Passord'/>
+                </div>
+
+                <div className="input-group">
+                    <label htmlFor="password">Bekreft passord</label>
+                    <input type='password' name='ConfirmPassword' className='login-input' placeholder='Gjenta passord'/>
+                </div>
+
+                <button type='button' className='login-btn' onClick={this.submitRegister.bind(this)}>Registrer</button>
             </div>
         </div>
         );
