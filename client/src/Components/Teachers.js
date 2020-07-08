@@ -3,7 +3,7 @@ import avatar from '../avatar.png'
 import { Link } from "react-router-dom";
 
 import apis from "../api";
-
+/*
 class Teachers extends Component {
     constructor(props) {
         super(props)
@@ -44,13 +44,12 @@ class Teachers extends Component {
                     </Link>
                 ))
                 }
-            </div >*/
+            </div >
         );
     }
-}
+}*/
 
-//await apis.getAllTeachers().then(teachers => { })
-/*const Teachers = () => {
+const Teachers = () => {
     //teachers: []
     const teachers = [
         {
@@ -128,11 +127,11 @@ class Teachers extends Component {
     return (
         <div title="Forelesere" className="teachers ">
             {teachers.map(teacher => (
-                <Link className="link" to="/teacher_page">
+                <Link className="link" to="/TeacherPage">
                     <div className="teacher" key={teacher}>
                         <img alt="avatar" src={avatar}></img>
                         <div className="teacher_info"><h1>{teacher.name}</h1>
-                            {teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))}</div>
+                            <p>{teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))} ved {teacher.university}</p></div>
                         <p className="teacher_total_grade">{teacher.grade}</p>
                         <div className="teacher_grades"><p>Karakter <br></br> karakter <br></br> karakter</p></div>
                     </div>
@@ -142,5 +141,5 @@ class Teachers extends Component {
         </div >
     );
 };
-*/
+
 export default Teachers;
