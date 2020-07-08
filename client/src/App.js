@@ -1,23 +1,34 @@
-import React from 'react';
-import Teachers from "./Components/Teachers";
-import Navbar from "./Components/Navbar";
-import './App.css';
+import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="main">
-        <Navbar />
-        <h1>Min foreleser</h1>
-        <h2>Finn din foreleser, gi en vurdering eller se hvilke karakterer hun eller han har!</h2>
-        <div className="search">
-          <input type="text" className="searchbar"></input>
-        </div>
+//Pages
+import HomePage from './Pages/HomePage';
+import Enter from './Pages/Enter';
+import NotFoundPage from './Pages/NotFoundPage';
+import TeacherPage from './Pages/TeacherPage';
 
-        <Teachers />
-      </div>
-    </div>
-  );
+
+class AppTemp extends Component {
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/404' component={NotFoundPage} />
+          <Route exact path='/LoggInn' component={Enter} />
+          <Route exact path='/TeacherPage' component={TeacherPage} />
+          <Redirect to='/404' />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
-export default App;
+export default AppTemp;

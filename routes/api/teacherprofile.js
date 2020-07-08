@@ -83,7 +83,7 @@ router.post('/', auth, [
 // @desc    Get all teacher profiles
 // @access  Public
 
-router.get('/', async (req, res) => {
+router.get('/teachers', async (req, res) => {
   console.log("INNI")
   try {
     const profiles = await TeacherProfile.find().populate('user', [

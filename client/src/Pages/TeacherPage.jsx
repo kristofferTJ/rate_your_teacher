@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from "../Components/Navbar";
 import '../App.css';
 
-function Teacher_page() {
+function TeacherPage() {
     return (
         <div className="Teacher_page">
             <Navbar />
@@ -11,4 +11,4 @@ function Teacher_page() {
     );
 }
 
-export default Teacher_page;
+export default TeacherPage;

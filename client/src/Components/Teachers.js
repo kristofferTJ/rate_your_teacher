@@ -30,7 +30,8 @@ class Teachers extends Component {
         console.log(teachers)
 
         return (
-            <div title="Forelesere" className="teachers ">
+            <p>Testing</p>
+            /*<div title="Forelesere" className="teachers ">
                 {teachers.map(teacher => (
                     <Link className="link" to="/teacher_page">
                         <div className="teacher" key={teacher}>
@@ -43,7 +44,7 @@ class Teachers extends Component {
                     </Link>
                 ))
                 }
-            </div >
+            </div >*/
         );
     }
 }
