@@ -13,7 +13,7 @@ class Teachers extends Component {
         }
     }
 
-    componentDidMount = async () => {
+    /*componentDidMount = async () => {
         this.setState({ isLoading: true })
 
         await apis.getAllTeachers().then(teachers => {
@@ -23,7 +23,7 @@ class Teachers extends Component {
             })
         })
 
-    }
+    }*/
 
     render() {
         const teachers = this.state
