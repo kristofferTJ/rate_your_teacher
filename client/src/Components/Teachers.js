@@ -1,5 +1,8 @@
 import React from "react";
-//mport apis from "./api";
+import avatar from '../avatar.png'
+import { Link } from "react-router-dom";
+
+//git mport apis from "./api";
 
 //await apis.getAllTeachers().then(teachers => { })
 const Teachers = () => {
@@ -80,14 +83,18 @@ const Teachers = () => {
     return (
         <div title="Forelesere" className="teachers ">
             {teachers.map(teacher => (
-                <div className="teacher" key={teacher}>
-                    <img alt="avatar" src="/avatar.png"></img>
-                    <h1>{teacher.name}</h1>
-                    {teacher.courses.map(cours => (<p>{cours.course}</p>))}
-                    <p>{teacher.grade}</p>
-                </div>
-            ))}
-        </div>
+                <Link to="/teacher_page">
+                    <div className="teacher" key={teacher}>
+                        <img alt="avatar" src={avatar}></img>
+                        <div className="teacher_info"><h1>{teacher.name}</h1>
+                            {teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))}</div>
+                        <p className="teacher_total_grade">{teacher.grade}</p>
+                        <div className="teacher_grades"><p>Karakter <br></br> karakter <br></br> karakter</p></div>
+                    </div>
+                </Link>
+            ))
+            }
+        </div >
     );
 };
 
