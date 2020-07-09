@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import avatar from '../avatar.png'
 import { Link } from "react-router-dom";
-import c from "config";
+//import c from "config";
 
 //import apis from "../api";
 
@@ -38,8 +38,9 @@ class Teachers extends Component {
     }
 
     render() {
-        const teachers = this.state
-        console.log(teachers)
+
+        console.log(this.state.teachers)
+        console.log(this.state.courses)
         return (
             //<p>Testing</p>
             <div title="Forelesere" className="teachers ">
@@ -48,7 +49,6 @@ class Teachers extends Component {
                         <div className="teacher" key={teacher}>
                             <img alt="avatar" src={teacher.user.avatar}></img>
                             <div className="teacher_info"><h1>{teacher.user.name}</h1>
-                                {teacher.courses.map(course => this.state.courses.filter(c => course._id == c._id).map(<p key={course}>{c.name}</p>))}
                                 ved {teacher.university}</div>
                             <p className="teacher_total_grade">{teacher.grade}</p>
                         </div>
