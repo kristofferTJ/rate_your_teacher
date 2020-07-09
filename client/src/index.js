@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import App from './App'
+
+//import Teacher_page from "./Components/Teacher_page";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,6 +12,17 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//const rootElement = document.getElementById("root");
+/*ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={App} />
+      <Route path="/teacher_page" component={Teacher_page} />
+    </Switch>
+  </BrowserRouter>,
+  rootElement
+);*/
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
