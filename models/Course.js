@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { model } = require('./User');
 
 const CourseSchema = new mongoose.Schema({
   name: {
@@ -22,6 +21,7 @@ const CourseSchema = new mongoose.Schema({
     {
       teacher: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'teacherprofile',
       },
     },
   ],
