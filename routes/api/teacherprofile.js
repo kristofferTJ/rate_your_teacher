@@ -10,12 +10,14 @@ const StudentProfile = require('../../models/StudentProfile');
 const User = require('../../models/User');
 const Course = require('../../models/Course');
 
-// @route   GET api/profile/me
+// @Todo  Make route public, different depending on who wants to see profile
+
+// @route   GET api/teacherprofile/me
 // @desc    Get current users profile
 // @access  Private
 router.get('/me', auth, async (req, res) => {
   try {
-    const profile = await StudentProfile.findOne({
+    const profile = await TeacherProfile.findOne({
       user: req.user.id,
     }).populate('user', ['name', 'avatar']);
 
@@ -30,7 +32,7 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/profile
+// @route   POST api/teacherprofile
 // @desc    Create or update user profile
 // @access  Private
 
@@ -43,13 +45,12 @@ router.post('/', auth, [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { university, location, bio, courses } = req.body;
+    const { university, bio, courses } = req.body;
 
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
     if (university) profileFields.university = university;
-    if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
     if (courses) profileFields.courses = courses;
 
@@ -79,7 +80,7 @@ router.post('/', auth, [
   },
 ]);
 
-// @route   GET api/profile
+// @route   GET api/teacherprofile
 // @desc    Get all teacher profiles
 // @access  Public
 
@@ -119,6 +120,30 @@ router.get('/user/:user_id', async (req, res) => {
   }
 });
 
+// @route   GET api/profile/profile/:profile_id
+// @desc    Get profile by profile ID
+// @access  Public
+
+router.get('/profile/:profile_id', async (req, res) => {
+  try {
+    const profile = await TeacherProfile.findOne({
+      _id: req.params.profile_id,
+    }).populate('user', ['name', 'avatar']);
+
+    if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Profile not found' });
+    }
+    res.status(500).send('Server error');
+  }
+});
+
+// This one is not really wanted, but maybe just to delete user
+
 // @route   DELETE api/teacherprofile
 // @desc    Delete teacher profile & user
 // @access  Private
@@ -136,25 +161,46 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-/*
+
 // @route   PUT api/profile/courses
 // @desc    Add course to teachers courslist
 // @access  Private
 
-router.patch('/courses', auth, async (req, res) => {
-  const currentCourses = TeacherProfile.findById(req.user.id).courses;
-  if()
-  const course = await Course.findById(req.courses.);
-   if(!course){
-    return res.status(400).json({ msg: 'The Course is not in our database' });
-   }
-   
-})
+router.put('/course/:course_id', auth, async (req, res) => {
+  try {
+    const teacher = await TeacherProfile.findOne({ user: req.user.id });
+    let currentCourses = teacher.courses;
 
-
+    if (
+      currentCourses.some((cor) => cor._id.toString() === req.params.course_id)
+    ) {
+      return res
+        .status(400)
+        .json({ msg: 'This teacher already has this course' });
+    }
+    const course = await Course.findById({ _id: req.params.course_id });
+    if (!course) {
+      return res.status(400).json({ msg: 'The Course is not in our database' });
+    }
+    currentCourses.unshift(course._id);
+    teacher.courses = currentCourses;
+    await teacher.save();
+    if (!course.teachers.some((t) => t._id.toString() === req.user.id)) {
+      course.teachers.unshift(req.user.id);
+      await course.save();
+    }
+    res.json(teacher.populate('course', ['name', 'coursecode']));
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Course not found' });
+    }
+    res.status(500).send('Server error');
+  }
+});
 
 // @route   PUT api/profile/experience
-// @desc    Delete profile experience
+// @desc    Add profile experience
 // @access  Private
 
 router.put(
@@ -175,7 +221,7 @@ router.put(
 
     const {
       title,
-      company,
+      workplace,
       location,
       from,
       to,
@@ -185,7 +231,7 @@ router.put(
 
     const newExp = {
       title,
-      company,
+      workplace,
       location,
       from,
       to,
@@ -228,7 +274,6 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-*/
 
 // @route    PUT api/profile/education
 // @desc     Add profile education
