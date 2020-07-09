@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
@@ -15,7 +14,11 @@ const Course = require('../../models/Course');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
+<<<<<<< HEAD
     const courses = await Course.find();
+=======
+    const courses = await Course.find().populate('teachers.teacher');
+>>>>>>> 4df7e8642135e9eb28ae6fe6460d5d5a07250f3f
     res.json(courses);
   } catch (err) {
     console.error(err.message);
@@ -24,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 // @route   POST api/courses
-// @desc    Create new Course
+// @desc    Create new or update Course
 // @access  Private
 router.post(
   '/',
@@ -55,10 +58,9 @@ router.post(
 
     try {
       let tmpC = await Course.findOne({ name, coursecode });
-
       if (tmpC) {
-        tmpC = Course.findOneAndUpdate(
-          { name, coursecode },
+        tmpC = await Course.findOneAndUpdate(
+          { _id: tmpC._id },
           { $set: CourseFields },
           { new: true }
         );
@@ -76,5 +78,25 @@ router.post(
     }
   }
 );
+
+// @route   GET api/courses/:course_id
+// @desc    Get course by ID
+// @access  Public
+router.get('/:course_id', async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.course_id);
+    if (course) {
+      return res.json(course);
+    }
+
+    res.status(404).json({ msg: 'Course not found' });
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'Course not found' });
+    }
+    console.error(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
 
 module.exports = router;

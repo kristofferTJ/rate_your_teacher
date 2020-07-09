@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
 const TeacherProfile = require('../../models/TeacherProfile');
-const StudentProfile = require('../../models/StudentProfile');
 const User = require('../../models/User');
 const Course = require('../../models/Course');
 
@@ -84,7 +82,11 @@ router.post('/', auth, [
 // @desc    Get all teacher profiles
 // @access  Public
 
+<<<<<<< HEAD
 router.get('/teachers', async (req, res) => {
+=======
+router.get('/', async (req, res) => {
+>>>>>>> 4df7e8642135e9eb28ae6fe6460d5d5a07250f3f
   try {
     const profiles = await TeacherProfile.find().populate('user', [
       'name',
@@ -162,7 +164,7 @@ router.delete('/', auth, async (req, res) => {
 });
 
 // @route   PUT api/profile/courses
-// @desc    Add course to teachers courslist
+// @desc    Add course to teachers courselist
 // @access  Private
 
 router.put('/course/:course_id', auth, async (req, res) => {
@@ -188,12 +190,40 @@ router.put('/course/:course_id', auth, async (req, res) => {
       course.teachers.unshift(req.user.id);
       await course.save();
     }
-    res.json(teacher.populate('course', ['name', 'coursecode']));
+    res.json(teacher.populate('courses.course', ['name', 'coursecode']));
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
       return res.status(400).json({ msg: 'Course not found' });
     }
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   DELETE api/profile/:course_id
+// @desc    Delete course from profile
+// @access  Private
+router.delete('/course/:course_id', auth, async (req, res) => {
+  try {
+    const profile = await TeacherProfile.findOne({ user: req.user.id });
+    const course = await Course.findById({
+      _id: JSON.stringify(req.params.course_id),
+    });
+
+    profile.courses = profile.courses.filter(
+      (cor) => cor._id.toString() !== req.params.exp_id
+    );
+
+    course.teachers = course.teachers.filter((teach) => {
+      teach._id.toString() !== profile._id.toString();
+    });
+
+    await profile.save();
+    await course.save();
+
+    res.json(profile);
+  } catch (error) {
+    console.error(err.message);
     res.status(500).send('Server error');
   }
 });
