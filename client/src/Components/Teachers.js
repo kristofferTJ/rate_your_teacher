@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import apis from "../api";
 
-class Teachers extends Component {
+/*class Teachers extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -47,9 +47,8 @@ class Teachers extends Component {
         );
     }
 }
-
-//await apis.getAllTeachers().then(teachers => { })
-/*const Teachers = () => {
+*/
+const Teachers = () => {
     //teachers: []
     const teachers = [
         {
@@ -141,5 +140,5 @@ class Teachers extends Component {
         </div >
     );
 };
-*/
+
 export default Teachers;
