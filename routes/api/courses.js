@@ -16,7 +16,7 @@ const Course = require('../../models/Course');
 router.get('/', async (req, res) => {
   try {
     const courses = await Course.find();
-    res.json(profiles);
+    res.json(courses);
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: 'Server error' });

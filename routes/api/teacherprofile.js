@@ -85,7 +85,6 @@ router.post('/', auth, [
 // @access  Public
 
 router.get('/teachers', async (req, res) => {
-  console.log("INNI")
   try {
     const profiles = await TeacherProfile.find().populate('user', [
       'name',

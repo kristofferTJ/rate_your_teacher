@@ -7,8 +7,7 @@ function App() {
             <p><img alt="logo"></img></p>
             <p>Om oss</p>
             <p>Kontakt</p>
-            <Link className="link" to="/LoggInn">
-                <p>Logg inn</p></Link>
+            <Link className="navbarLink" to="/LoggInn"><p>Logg inn</p></Link>
         </div>
     );
 }
