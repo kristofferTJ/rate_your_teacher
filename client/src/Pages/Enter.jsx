@@ -95,14 +95,86 @@ class RegisterBox extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {  };
+        this.state = { 
+            mail : "", 
+            password : "", 
+            errors: [],
+            pwdState: null, };
+    }
+
+    showValidationError(elm, msg) {
+        this.setState((prevState) => ( { errors: [...prevState.errors, {elm, msg}] } ));
+    }
+
+    clearValidationError(elm) {
+        this.setState((prevState) => {
+            let newArr = [];
+            for(let err of prevState.errors) {
+                if(elm != err.elm) {
+                    newArr.push(err);
+                }
+            }
+            return {errors: newArr};
+        });
+    }
+
+    onMailChange(e) {
+        this.setState({ mail: e.target.value });
+        this.clearValidationError('mail');
+    }
+
+    onPasswordChange(e) {
+        this.setState({ password: e.target.value });
+        this.clearValidationError('password');
+
+
+        this.setState({ pwdState: 'weak'});
+        if(e.target.value.length > 8) {
+            this.setState({ pwdState: 'medium' });
+        } if (e.target.value.length > 12 ) {
+            this.setState({ pwdState: 'strong'});
+        }
     }
 
     submitRegister(e) {
 
+        if (this.state.mail == '') {
+            this.showValidationError('mail', 'Mailfeltet kan ikke være tomt!')
+        } 
+        if (this.state.password == '') {
+            this.showValidationError('password', 'Passordfeltet kan ikke være tomt!')
+        }
+
+
     }
 
     render() {
+
+        let mailErr = null, passwordErr = null;
+
+        for(let err of this.state.errors) {
+            if(err.elm == 'mail') {
+                mailErr = err.msg;
+            }
+            if (err.elm == 'password') {
+                passwordErr = err.msg;
+            }
+        }
+
+        let pwdWeak = false, pwdMedium = false, pwdStrong = false;
+
+        if( this.state.pwdState == 'weak') {
+            pwdWeak = true;
+        } else if( this.state.pwdState == 'medium') {
+            pwdWeak = true;
+            pwdMedium = true;
+        } else if( this.state.pwdState == 'strong') {
+            pwdWeak = true;
+            pwdMedium = true;
+            pwdStrong = true;
+        } 
+
+
         return (
         <div className="inner-container">
             <div className="header">
@@ -112,17 +184,34 @@ class RegisterBox extends React.Component {
 
                 <div className="input-group">
                     <label htmlFor="mail">Mail</label>
-                    <input type='text' name='mail' className='login-input' placeholder='Ola.normann@domene.no'/>
-                </div>
-
-                <div className="input-group">
-                    <label htmlFor="Mail">Bekreft mail</label>
-                    <input type='text' name='Mail' className='login-input' placeholder='Gjenta mail'/>
+                    <input 
+                    type='text' 
+                    name='mail' 
+                    className='login-input' 
+                    placeholder='Ola.normann@domene.no' 
+                    onChange={this.onMailChange.bind(this)}
+                    />
+                    <small className="danger-error">{ mailErr ? mailErr : '' }</small>
                 </div>
 
                 <div className="input-group">
                     <label htmlFor="password">Passord</label>
-                    <input type='password' name='password' className='login-input' placeholder='Passord'/>
+                    <input 
+                    type='password' 
+                    name='password' 
+                    className='login-input' 
+                    placeholder='Passord'
+                    onChange={this.onPasswordChange.bind(this)}
+                    />
+                    <small className="danger-error">{ passwordErr 
+                        ? passwordErr 
+                        : '' }</small>
+                    
+                    <div className="password-state">
+                        <div className= {"pwd pwd-weak " + (pwdWeak ? 'show' : '')} ></div>
+                        <div className={"pwd pwd-medium " + (pwdMedium ? 'show' : '')}></div>
+                        <div className={"pwd pwd-strong " + (pwdStrong ? 'show' : '')}></div>
+                    </div>
                 </div>
 
                 <div className="input-group">

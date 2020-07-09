@@ -38,12 +38,8 @@ class Teachers extends Component {
     }
 
     render() {
-<<<<<<< HEAD
-        const teachers = this.state()
-=======
         const teachers = this.state
         const courses = this.state
->>>>>>> origin/master
         console.log(teachers)
         console.log(courses)
         return (
