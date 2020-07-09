@@ -5,6 +5,10 @@ const TeacherProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
+  name: {
+    type: String,
+    required: String,
+  },
   university: {
     type: String,
   },
