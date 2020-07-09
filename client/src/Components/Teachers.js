@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import avatar from '../avatar.png'
 import { Link } from "react-router-dom";
+//import c from "config";
 
-import apis from "../api";
+//import apis from "../api";
 
-/*class Teachers extends Component {
+class Teachers extends Component {
     constructor(props) {
         super(props)
         this.state = {
             teachers: [],
+            courses: [],
             isLoading: false
         }
     }
@@ -16,29 +18,41 @@ import apis from "../api";
     componentDidMount = async () => {
         this.setState({ isLoading: true })
 
-        await apis.getAllTeachers().then(teachers => {
+        /*await apis.getAllTeachers().then(teachers => {
             this.setState({
                 teachers: teachers.profiles,
                 isLoading: false
             })
-        })
+        })*/
+        fetch("http://localhost:8000/api/teacherprofile/")
+            .then(res => res.text())
+            .then(res => this.setState({ teachers: JSON.parse(res) }))
+            .then(this.setState({ isLoading: false }))
 
+        this.setState({ isLoading: true })
+
+        fetch("http://localhost:8000/api/courses/")
+            .then(res => res.text())
+            .then(res => this.setState({ courses: JSON.parse(res) }))
+            .then(this.setState({ isLoading: false }))
     }
 
     render() {
         const teachers = this.state
+        const courses = this.state
         console.log(teachers)
-
+        console.log(courses)
         return (
+            //<p>Testing</p>
             <div title="Forelesere" className="teachers ">
-                {teachers.map(teacher => (
-                    <Link className="link" to="/teacher_page">
+                {this.state.teachers.map(teacher => (
+                    <Link className="link" to="/teacherPage">
                         <div className="teacher" key={teacher}>
-                            <img alt="avatar" src={avatar}></img>
-                            <div className="teacher_info"><h1>{teacher.name}</h1>
-                                {teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))}</div>
+                            <img alt="avatar" src={teacher.user.avatar}></img>
+                            <div className="teacher_info"><h1>{teacher.user.name}</h1>
+                                {teacher.courses.map(course => <p>{course.name}</p>)}
+                                ved {teacher.university}</div>
                             <p className="teacher_total_grade">{teacher.grade}</p>
-                            <div className="teacher_grades"><p>Karakter <br></br> karakter <br></br> karakter</p></div>
                         </div>
                     </Link>
                 ))
@@ -47,7 +61,7 @@ import apis from "../api";
         );
     }
 }
-*/
+/*
 const Teachers = () => {
     //teachers: []
     const teachers = [
@@ -126,11 +140,11 @@ const Teachers = () => {
     return (
         <div title="Forelesere" className="teachers ">
             {teachers.map(teacher => (
-                <Link className="link" to="/teacher_page">
+                <Link className="link" to="/TeacherPage">
                     <div className="teacher" key={teacher}>
                         <img alt="avatar" src={avatar}></img>
                         <div className="teacher_info"><h1>{teacher.name}</h1>
-                            {teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))}</div>
+                            <p>{teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))} ved {teacher.university}</p></div>
                         <p className="teacher_total_grade">{teacher.grade}</p>
                         <div className="teacher_grades"><p>Karakter <br></br> karakter <br></br> karakter</p></div>
                     </div>
@@ -139,6 +153,6 @@ const Teachers = () => {
             }
         </div >
     );
-};
+};*/
 
 export default Teachers;

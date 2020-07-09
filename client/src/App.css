@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgba(124, 128, 131, 0.705);
+  background-color: rgba(124, 128, 131, 0.651);
   min-height: 100vh;
 }
 
@@ -23,8 +23,11 @@
 
 .teacher img{
   margin: auto;
+  margin-top: 0;
   grid-column-start: 1;
   grid-row-start: 1;
+  width: 100%;
+  padding: 5px;
 }
 
 .teacher_info{

@@ -6,7 +6,7 @@ function TeacherPage() {
     return (
         <div className="Teacher_page">
             <Navbar />
-            <h1>HEI</h1>
+            <h1>HEI, HEI </h1>
         </div>
     );
 }
