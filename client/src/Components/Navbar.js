@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, } from 'react-router-dom';
 
 function App() {
     return (
@@ -6,7 +7,7 @@ function App() {
             <p><img alt="logo"></img></p>
             <p>Om oss</p>
             <p>Kontakt</p>
-            <p>Logg inn</p>
+            <Link className="navbarLink" to="/LoggInn"><p>Logg inn</p></Link>
         </div>
     );
 }
