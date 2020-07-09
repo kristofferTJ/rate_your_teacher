@@ -14,11 +14,7 @@ const Course = require('../../models/Course');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-<<<<<<< HEAD
-    const courses = await Course.find();
-=======
     const courses = await Course.find().populate('teachers.teacher');
->>>>>>> 4df7e8642135e9eb28ae6fe6460d5d5a07250f3f
     res.json(courses);
   } catch (err) {
     console.error(err.message);

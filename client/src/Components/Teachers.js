@@ -24,7 +24,7 @@ class Teachers extends Component {
                 isLoading: false
             })
         })*/
-        fetch("http://localhost:8000/api/teacherprofile/teachers")
+        fetch("http://localhost:8000/api/teacherprofile/")
             .then(res => res.text())
             .then(res => this.setState({ teachers: JSON.parse(res) }))
             .then(this.setState({ isLoading: false }))
@@ -38,9 +38,10 @@ class Teachers extends Component {
     }
 
     render() {
-
-        console.log(this.state.teachers)
-        console.log(this.state.courses)
+        const teachers = this.state
+        const courses = this.state
+        console.log(teachers)
+        console.log(courses)
         return (
             //<p>Testing</p>
             <div title="Forelesere" className="teachers ">
@@ -49,6 +50,7 @@ class Teachers extends Component {
                         <div className="teacher" key={teacher}>
                             <img alt="avatar" src={teacher.user.avatar}></img>
                             <div className="teacher_info"><h1>{teacher.user.name}</h1>
+                                {teacher.courses.map(course => <p>{course.name}</p>)}
                                 ved {teacher.university}</div>
                             <p className="teacher_total_grade">{teacher.grade}</p>
                         </div>
