@@ -59,34 +59,108 @@ class LoginBox extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {  };
+        this.state = { 
+            email : "", 
+            password : "", 
+            errors: [],
+            pwdState: null };
+    }
+
+    showValidationError(elm, msg) {
+        this.setState((prevState) => ( { errors: [...prevState.errors, {elm, msg}] } ));
+    }
+
+    clearValidationError(elm) {
+        this.setState((prevState) => {
+            let newArr = [];
+            for(let err of prevState.errors) {
+                if(elm != err.elm) {
+                    newArr.push(err);
+                }
+            }
+            return {errors: newArr};
+        });
+    }
+
+    onemailChange(e) {
+        this.setState({ email: e.target.value });
+        this.clearValidationError('email');
+
+    }
+
+    onPasswordChange(e) {
+        this.setState({ password: e.target.value });
+        this.clearValidationError('password');
     }
 
     submitLogin(e) {
 
+        // don't remember from where i copied this code, but this works.
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
+        if (this.state.email == '') {
+            this.showValidationError('email', 'Emailfeltet kan ikke være tomt!')
+        } else if (!(re.test(this.state.email)) ) {
+            this.showValidationError('email', 'Det er ikke en gyldig Email!')
+        }
+        if (this.state.password == '') {
+            this.showValidationError('password', 'Passordfeltet kan ikke være tomt!')
+        }
     }
 
     render() {
+
+
+        let emailErr = null, passwordErr = null;
+
+        for(let err of this.state.errors) {
+            if(err.elm == 'email') {
+                emailErr = err.msg;
+            }
+            if (err.elm == 'password') {
+                passwordErr = err.msg;
+            }
+        }
+
         return (
-        <div className="inner-container">
-            <div className="header">
-                Logg Inn
-            </div>
-            <div className="box">
-
-                <div className="input-group">
-                    <label htmlFor="mail">Mail</label>
-                    <input type='text' name='mail' className='login-input' placeholder='Mail'/>
+            
+            <div className="inner-container">
+                <div className="header">
+                    Logg Inn
                 </div>
+                <div className="box">
 
-                <div className="input-group">
-                    <label htmlFor="password">Passord</label>
-                    <input type='password' name='password' className='login-input' placeholder='Passord'/>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input 
+                            type='email' 
+                            name='email' 
+                            value={this.state.email}
+                            className='login-input' 
+                            placeholder='Ola.normann@domene.no' 
+                            onChange={this.onemailChange.bind(this)}
+                        />
+                        <small className="danger-error">{ emailErr ? emailErr : '' }</small>
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="password">Passord</label>
+                        <input 
+                            type='password' 
+                            name='password' 
+                            className='login-input' 
+                            placeholder='Passord'
+                            onChange={this.onPasswordChange.bind(this)}
+                        />
+                        <small className="danger-error">{ passwordErr 
+                            ? passwordErr 
+                            : '' }</small>
+                    </div>
+
+                    <button type='button' className='login-btn' onClick={this.submitLogin.bind(this)}>Logg Inn</button>
                 </div>
-
-                <button type='button' className='login-btn' onClick={this.submitLogin.bind(this)}>Logg Inn</button>
             </div>
-        </div>
         );
     }
 }
@@ -96,8 +170,9 @@ class RegisterBox extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-            mail : "", 
-            password : "", 
+            email : "", 
+            password : "",
+            confirmPassword : "", 
             errors: [],
             pwdState: null, };
     }
@@ -118,9 +193,10 @@ class RegisterBox extends React.Component {
         });
     }
 
-    onMailChange(e) {
-        this.setState({ mail: e.target.value });
-        this.clearValidationError('mail');
+    onemailChange(e) {
+        this.setState({ email: e.target.value });
+        this.clearValidationError('email');
+
     }
 
     onPasswordChange(e) {
@@ -136,13 +212,27 @@ class RegisterBox extends React.Component {
         }
     }
 
+    onConfirmPasswordChange(e) {
+        this.setState({ confirmPassword: e.target.value});
+        this.clearValidationError('confirmPassword');
+    }
+
     submitRegister(e) {
 
-        if (this.state.mail == '') {
-            this.showValidationError('mail', 'Mailfeltet kan ikke være tomt!')
-        } 
+        // don't remember from where i copied this code, but this works.
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
+        if (this.state.email == '') {
+            this.showValidationError('email', 'Emailfeltet kan ikke være tomt!')
+        } else if (!(re.test(this.state.email)) ) {
+            this.showValidationError('email', 'Det er ikke en gyldig Email!')
+        }
         if (this.state.password == '') {
             this.showValidationError('password', 'Passordfeltet kan ikke være tomt!')
+        }
+        if (this.state.confirmPassword != this.state.password) {
+            this.showValidationError('confirmPassword', 'Passordet er ikke gjentatt korrekt')
         }
 
 
@@ -150,14 +240,17 @@ class RegisterBox extends React.Component {
 
     render() {
 
-        let mailErr = null, passwordErr = null;
+        let emailErr = null, passwordErr = null, confirmPasswordErr = null;
 
         for(let err of this.state.errors) {
-            if(err.elm == 'mail') {
-                mailErr = err.msg;
+            if(err.elm == 'email') {
+                emailErr = err.msg;
             }
             if (err.elm == 'password') {
                 passwordErr = err.msg;
+            }
+            if (err.elm == 'confirmPassword') {
+                confirmPasswordErr = err.msg;
             }
         }
 
@@ -183,15 +276,16 @@ class RegisterBox extends React.Component {
             <div className="box">
 
                 <div className="input-group">
-                    <label htmlFor="mail">Mail</label>
+                    <label htmlFor="email">Email</label>
                     <input 
-                    type='text' 
-                    name='mail' 
+                    type='email' 
+                    name='email' 
+                    value={this.state.email}
                     className='login-input' 
                     placeholder='Ola.normann@domene.no' 
-                    onChange={this.onMailChange.bind(this)}
+                    onChange={this.onemailChange.bind(this)}
                     />
-                    <small className="danger-error">{ mailErr ? mailErr : '' }</small>
+                    <small className="danger-error">{ emailErr ? emailErr : '' }</small>
                 </div>
 
                 <div className="input-group">
@@ -216,7 +310,14 @@ class RegisterBox extends React.Component {
 
                 <div className="input-group">
                     <label htmlFor="password">Bekreft passord</label>
-                    <input type='password' name='ConfirmPassword' className='login-input' placeholder='Gjenta passord'/>
+                    <input 
+                    type='password' 
+                    name='ConfirmPassword' 
+                    className='login-input' 
+                    placeholder='Gjenta passord'
+                    onChange={this.onConfirmPasswordChange.bind(this)} 
+                    />
+                    <small className="danger-error">{ confirmPasswordErr ? confirmPasswordErr : '' }</small>
                 </div>
 
                 <button type='button' className='login-btn' onClick={this.submitRegister.bind(this)}>Registrer</button>

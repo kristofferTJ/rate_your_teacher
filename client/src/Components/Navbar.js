@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 function App() {
     return (
         <div className="navbar">
-            <p><img alt="logo"></img></p>
+            <Link className="HomeLink" to='/'>
+                <p><img alt="logo"></img></p>
+            </Link>
             <p>Om oss</p>
             <p>Kontakt</p>
             <Link className="navbarLink" to="/LoggInn"><p>Logg inn</p></Link>
