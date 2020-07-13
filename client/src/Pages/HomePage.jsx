@@ -16,7 +16,7 @@ function HomePage() {
           </form>
           <p>Filtrer på <a href="nrk.no">universitet</a> og eller <a href="nrk.no">fag</a></p>
         </div>
-        <Teachers />
+        <Teachers search="john" />
       </div>
     </div>
   );
