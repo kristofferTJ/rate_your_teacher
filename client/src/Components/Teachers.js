@@ -11,11 +11,13 @@ class Teachers extends Component {
         this.state = {
             teachers: [],
             courses: [],
-            isLoading: false
+            isLoading: false,
+            search: ''
         }
     }
 
     componentDidMount = async () => {
+
         this.setState({ isLoading: true })
 
         fetch("http://localhost:8000/api/teacherprofile/")
@@ -31,25 +33,38 @@ class Teachers extends Component {
             .then(this.setState({ isLoading: false }))
     }
 
+    static getDerivedStateFromProps(props, state) {
+        return { search: props.search };
+    }
+
+    /*
+    static getDerivedStateFromProps() {
+        this.setState({ search: this.props.search })
+    }
+*/
+
     render() {
         /*const teachers = this.state
         const courses = this.state
         console.log(teachers)
         console.log(courses)*/
+        console.log("props" + this.props.search)
+        console.log("search" + this.state.search)
+
         return (
-            //<p>Testing</p>
-            <div title="Forelesere" className="teachers ">
-                {this.state.teachers.filter(teacher => teacher.user.name.toLowerCase().includes(this.props.search.toLowerCase())).map(teacher => (
-                    <Link className="link" to="/teacherPage">
-                        <div className="teacher" key={teacher}>
-                            <img alt="avatar" src={teacher.user.avatar}></img>
-                            <div className="teacher_info"><h1>{teacher.user.name}</h1>
-                                {teacher.courses.map(course => <p>{course.name}</p>)}
+            < div title="Forelesere" className="teachers " >
+                {
+                    this.state.teachers.filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
+                        <Link className="link" to="/teacherPage">
+                            <div className="teacher" key={teacher}>
+                                <img alt="avatar" src={teacher.user.avatar}></img>
+                                <div className="teacher_info"><h1>{teacher.user.name}</h1>
+                                    {teacher.courses.map(course => <p>{course.name}</p>)}
                                 ved {teacher.university}</div>
-                            <p className="teacher_total_grade">{teacher.grade}</p>
-                        </div>
-                    </Link>
-                ))
+                                <p className="teacher_total_grade">{teacher.grade}</p>
+                            </div>
+                        </Link>
+                    ))
                 }
             </div >
         );
