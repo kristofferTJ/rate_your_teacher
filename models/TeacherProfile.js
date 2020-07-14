@@ -5,12 +5,38 @@ const TeacherProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
+  courses: [
+    {
+      course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'course',
+      },
+      rating: [
+        {
+          user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user',
+          },
+          communication: {
+            type: Number,
+          },
+          knowledge: {
+            type: Number,
+          },
+          assistance: {
+            type: Number,
+          },
+        },
+      ],
+    },
+  ],
   name: {
     type: String,
     required: String,
   },
   university: {
     type: String,
+    required: String,
   },
 
   bio: {
@@ -72,14 +98,6 @@ const TeacherProfileSchema = new mongoose.Schema({
       },
       description: {
         type: String,
-      },
-    },
-  ],
-  courses: [
-    {
-      course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'course',
       },
     },
   ],

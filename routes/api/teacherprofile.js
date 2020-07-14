@@ -84,10 +84,14 @@ router.post('/', auth, [
 
 router.get('/', async (req, res) => {
   try {
-    const profiles = await TeacherProfile.find().populate('user', [
-      'name',
-      'avatar',
-    ]);
+    var profiles = await TeacherProfile.find()
+      .populate({
+        path: 'courses',
+        //populate: { path: 'course', model: 'course' },
+      })
+      .populate('user', ['name', 'avatar']);
+
+    console.log(profiles);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
