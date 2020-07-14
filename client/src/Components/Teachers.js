@@ -11,19 +11,15 @@ class Teachers extends Component {
         this.state = {
             teachers: [],
             courses: [],
-            isLoading: false
+            isLoading: false,
+            search: ''
         }
     }
 
     componentDidMount = async () => {
+
         this.setState({ isLoading: true })
 
-        /*await apis.getAllTeachers().then(teachers => {
-            this.setState({
-                teachers: teachers.profiles,
-                isLoading: false
-            })
-        })*/
         fetch("http://localhost:8000/api/teacherprofile/")
             .then(res => res.text())
             .then(res => this.setState({ teachers: JSON.parse(res) }))
@@ -37,122 +33,43 @@ class Teachers extends Component {
             .then(this.setState({ isLoading: false }))
     }
 
+    static getDerivedStateFromProps(props, state) {
+        return { search: props.search };
+    }
+
+    /*
+    static getDerivedStateFromProps() {
+        this.setState({ search: this.props.search })
+    }
+*/
+
     render() {
-        const teachers = this.state
+        /*const teachers = this.state
         const courses = this.state
         console.log(teachers)
-        console.log(courses)
+        console.log(courses)*/
+        console.log("props" + this.props.search)
+        console.log("search" + this.state.search)
+
         return (
-            //<p>Testing</p>
-            <div title="Forelesere" className="teachers ">
-                {this.state.teachers.map(teacher => (
-                    <Link className="link" to="/teacherPage">
-                        <div className="teacher" key={teacher}>
-                            <img alt="avatar" src={teacher.user.avatar}></img>
-                            <div className="teacher_info"><h1>{teacher.user.name}</h1>
-                                {teacher.courses.map(course => <p>{course.name}</p>)}
+            < div title="Forelesere" className="teachers " >
+                {
+                    this.state.teachers.filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
+                        <Link className="link" to="/teacherPage">
+                            <div className="teacher" key={teacher}>
+                                <img alt="avatar" src={teacher.user.avatar}></img>
+                                <div className="teacher_info"><h1>{teacher.user.name}</h1>
+                                    {teacher.courses.map(course => <p>{course.name}</p>)}
                                 ved {teacher.university}</div>
-                            <p className="teacher_total_grade">{teacher.grade}</p>
-                        </div>
-                    </Link>
-                ))
+                                <p className="teacher_total_grade">{teacher.grade}</p>
+                            </div>
+                        </Link>
+                    ))
                 }
             </div >
         );
     }
 }
-/*
-const Teachers = () => {
-    //teachers: []
-    const teachers = [
-        {
-            name: "Per",
-            grade: "A",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-                { course: "Matte" },
-                { course: "Exphil" }
 
-            ]
-        },
-        {
-            name: "Arne",
-            grade: "C",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-
-                { course: "Matte" },
-                { course: "Exphil" }
-
-            ]
-        },
-        {
-            name: "Kari",
-            grade: "B",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-
-                { course: "Matte" },
-                { course: "Exphil" }
-
-            ]
-        },
-        {
-            name: "Kåre",
-            grade: "D",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-
-                { course: "Matte" },
-                { course: "Exphil" }
-
-            ]
-        },
-        {
-            name: "Bob",
-            grade: "E",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-
-                { course: "Matte" },
-                { course: "Exphil" }
-
-            ]
-        },
-        {
-            name: "Kjersti",
-            grade: "A",
-            avatar: "sf",
-            university: "NTNU",
-            courses: [
-
-                { course: "Matte" },
-                { course: "Exphil" }
-
-            ]
-        }
-    ];
-    return (
-        <div title="Forelesere" className="teachers ">
-            {teachers.map(teacher => (
-                <Link className="link" to="/TeacherPage">
-                    <div className="teacher" key={teacher}>
-                        <img alt="avatar" src={avatar}></img>
-                        <div className="teacher_info"><h1>{teacher.name}</h1>
-                            <p>{teacher.courses.map(cours => (<p key={cours}>{cours.course}</p>))} ved {teacher.university}</p></div>
-                        <p className="teacher_total_grade">{teacher.grade}</p>
-                        <div className="teacher_grades"><p>Karakter <br></br> karakter <br></br> karakter</p></div>
-                    </div>
-                </Link>
-            ))
-            }
-        </div >
-    );
-};*/
 
 export default Teachers;
