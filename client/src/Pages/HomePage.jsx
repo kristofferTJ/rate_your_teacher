@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
+import { Dropdown } from 'semantic-ui-react'
 import Teachers from "../Components/Teachers";
 import Navbar from "../Components/Navbar";
 import '../App.css';
+
+
+const uniOptions = [
+  { key: 'ntnu', value: 'ntnu', text: 'ntnu' },
+  { key: 'uio', value: 'uio', text: 'Universitetet i Oslo' },
+]
 
 class HomePage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      search: ""
+      search: "",
+      uni: "",
+      course: ""
     }
     this.updateSearch = this.updateSearch.bind(this)
   }
 
   updateSearch(e) {
-    console.log("gtyhh")
     const newSearch = document.getElementById("input").value
     this.setState({ search: newSearch })
   }
 
+
   render() {
-    console.log("gei")
-    console.log("state" + this.state.search)
     return (
+
       <div className="App">
         <div className="main">
           <Navbar />
@@ -31,9 +39,9 @@ class HomePage extends Component {
               <input type="text" className="searchbar" id="input" placeholder="Søk etter foreleseren etter navn"></input>
               <button type="submit" value="" onClick={this.updateSearch} className="searchButton"></button>
             </div>
-            <p>Filtrer på <a href="nrk.no">universitet</a> og eller <a href="nrk.no">fag</a></p>
+            <p>Filtrer på <Dropdown placeholder="Universitet" fluid search selection options={uniOptions} /> og eller <a href="nrk.no">fag</a></p>
           </div>
-          <Teachers search={this.state.search} />
+          <Teachers search={this.state.search} uni="" course="" />
         </div>
       </div>
     );

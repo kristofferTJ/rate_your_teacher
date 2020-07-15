@@ -12,7 +12,9 @@ class Teachers extends Component {
             teachers: [],
             courses: [],
             isLoading: false,
-            search: ''
+            search: '',
+            uni: '',
+            course: ''
         }
     }
 
