@@ -14,7 +14,14 @@ const Course = require('../../models/Course');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const courses = await Course.find().populate('teachers.teacher');
+    var courses = await Course.find().populate({
+      path: 'teachers',
+      select: 'name',
+      model: 'teacherprofile',
+    });
+
+    console.log(courses[0].teachers);
+
     res.json(courses);
   } catch (err) {
     console.error(err.message);
@@ -50,7 +57,7 @@ router.post(
     if (coursecode) CourseFields.coursecode = coursecode;
     if (semester) CourseFields.semester = semester;
     if (year) CourseFields.year = year;
-    if (teachers) CourseFields.courses = teachers;
+    //if (teachers) CourseFields.courses = teachers;
 
     try {
       let tmpC = await Course.findOne({ name, coursecode });

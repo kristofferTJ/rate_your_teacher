@@ -7,10 +7,12 @@ const TeacherProfileSchema = new mongoose.Schema({
   },
   courses: [
     {
-      course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'course',
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'course',
+    },
+  ],
+  /*
+      
       rating: [
         {
           user: {
@@ -27,9 +29,7 @@ const TeacherProfileSchema = new mongoose.Schema({
             type: Number,
           },
         },
-      ],
-    },
-  ],
+        */
   name: {
     type: String,
     required: String,
