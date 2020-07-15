@@ -5,6 +5,10 @@ const StudentProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
+  university: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = StudentProfile = mongoose.model(

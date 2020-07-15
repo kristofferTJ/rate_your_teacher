@@ -30,6 +30,43 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
+// @route   POST api/studentprofile
+// @desc    Create or update student profile
+// @access  Private
+
+router.post('/', auth, async (req, res) => {
+  // Build profile object
+  const { university } = req.body;
+
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (university) profileFields.university = university;
+
+  try {
+    let profile = await StudentProfile.findOne({ user: req.user.id });
+
+    if (profile) {
+      //Update
+      profile = await StudentProfile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+
+      return res.send(profile);
+    }
+
+    // Create
+    profile = StudentProfile(profileFields);
+
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route   DELETE api/studentprofile
 // @desc    Delete student profile & user
 // @access  Private

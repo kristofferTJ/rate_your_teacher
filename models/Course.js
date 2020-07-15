@@ -19,10 +19,8 @@ const CourseSchema = new mongoose.Schema({
   },
   teachers: [
     {
-      teacher: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'teacherprofile',
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'teacherprofile',
     },
   ],
 });
