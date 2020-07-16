@@ -9,9 +9,11 @@ class HomePage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      courses: [],
       search: "",
       uni: "",
       course: "",
+      isLoading: false
     }
     this.updateSearch = this.updateSearch.bind(this)
   }
@@ -30,6 +32,16 @@ class HomePage extends Component {
     this.setState({ course: cour })
   }
 
+  componentDidMount = async () => {
+
+    this.setState({ isLoading: true })
+
+    fetch("http://localhost:8000/api/courses/")
+      .then(res => res.text())
+      .then(res => this.setState({ courses: JSON.parse(res) }))
+      .then(this.setState({ isLoading: false }))
+  }
+
   render() {
     return (
 
@@ -46,8 +58,7 @@ class HomePage extends Component {
               <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "NTNU")} >NTNU</Dropdown.Item>
               <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "UIO")}>Universitetet i Oslo</Dropdown.Item>
             </DropdownButton> <p>og eller </p><DropdownButton className="dropdown" id="dropdown-basic-button-cource" title="Fag">
-                <Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, "Statistikk")} >Statistikk</Dropdown.Item>
-                <Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, "Matte")}>Matte</Dropdown.Item>
+                {this.state.courses.map(course => (<Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, course.name)}>{course.name}</Dropdown.Item>))}
               </DropdownButton></div>
           </div>
           <Teachers search={this.state.search} uni={this.state.uni} course={this.state.course} />
