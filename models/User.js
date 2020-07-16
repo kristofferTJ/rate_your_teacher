@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  /*name: {
     type: String,
-    require: true,
-  },
+    require: true, navn burde ikke være krevd. De skal være anonyme 
+  },*/
   email: {
     type: String,
     required: true,

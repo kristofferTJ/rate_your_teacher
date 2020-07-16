@@ -1,6 +1,8 @@
 import React from 'react'
 import '../sass/_loginSty.scss'
 import NavBar from '../Components/Navbar'
+import axios from 'axios'
+import { Link } from "react-router-dom";
 
 
 
@@ -74,7 +76,7 @@ class LoginBox extends React.Component {
         this.setState((prevState) => {
             let newArr = [];
             for(let err of prevState.errors) {
-                if(elm != err.elm) {
+                if(elm !== err.elm) {
                     newArr.push(err);
                 }
             }
@@ -99,12 +101,12 @@ class LoginBox extends React.Component {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-        if (this.state.email == '') {
+        if (this.state.email === '') {
             this.showValidationError('email', 'Emailfeltet kan ikke være tomt!')
         } else if (!(re.test(this.state.email)) ) {
             this.showValidationError('email', 'Det er ikke en gyldig Email!')
         }
-        if (this.state.password == '') {
+        if (this.state.password === '') {
             this.showValidationError('password', 'Passordfeltet kan ikke være tomt!')
         }
     }
@@ -115,10 +117,10 @@ class LoginBox extends React.Component {
         let emailErr = null, passwordErr = null;
 
         for(let err of this.state.errors) {
-            if(err.elm == 'email') {
+            if(err.elm === 'email') {
                 emailErr = err.msg;
             }
-            if (err.elm == 'password') {
+            if (err.elm === 'password') {
                 passwordErr = err.msg;
             }
         }
@@ -185,7 +187,7 @@ class RegisterBox extends React.Component {
         this.setState((prevState) => {
             let newArr = [];
             for(let err of prevState.errors) {
-                if(elm != err.elm) {
+                if(elm !== err.elm) {
                     newArr.push(err);
                 }
             }
@@ -217,22 +219,47 @@ class RegisterBox extends React.Component {
         this.clearValidationError('confirmPassword');
     }
 
-    submitRegister(e) {
+    async submitRegister(e) {
 
         // don't remember from where i copied this code, but this works.
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-        if (this.state.email == '') {
+        if (this.state.email === '') {
             this.showValidationError('email', 'Emailfeltet kan ikke være tomt!')
         } else if (!(re.test(this.state.email)) ) {
             this.showValidationError('email', 'Det er ikke en gyldig Email!')
         }
-        if (this.state.password == '') {
+        if (this.state.password === '') {
             this.showValidationError('password', 'Passordfeltet kan ikke være tomt!')
         }
-        if (this.state.confirmPassword != this.state.password) {
+        if (this.state.confirmPassword !== this.state.password) {
             this.showValidationError('confirmPassword', 'Passordet er ikke gjentatt korrekt')
+        }
+        if ((this.state.email !== '') 
+            && (re.test(this.state.email)) 
+            && (this.state.password !== '') 
+            && (this.state.confirmPassword === this.state.password)) {
+
+                try {
+                    const config = {
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    }
+                    const body = JSON.stringify(this.state)
+
+
+                    
+                    const res = await axios.post('http://localhost:8000/api/users', body, config)
+                    this.showValidationError('email', "User registered")
+                    //  console.log(res.data)
+                } catch(err) {
+                    if (err.response.data.errors[0].msg === "User already exists ") {
+                        this.showValidationError('email', err.response.data.errors[0].msg)
+                    } else if (err.response.data.errors[0].msg === "Please enter a password with 6 or more characters")
+                        this.showValidationError('password', err.response.data.errors[0].msg)
+                }
         }
 
 
@@ -243,25 +270,25 @@ class RegisterBox extends React.Component {
         let emailErr = null, passwordErr = null, confirmPasswordErr = null;
 
         for(let err of this.state.errors) {
-            if(err.elm == 'email') {
+            if(err.elm === 'email') {
                 emailErr = err.msg;
             }
-            if (err.elm == 'password') {
+            if (err.elm === 'password') {
                 passwordErr = err.msg;
             }
-            if (err.elm == 'confirmPassword') {
+            if (err.elm === 'confirmPassword') {
                 confirmPasswordErr = err.msg;
             }
         }
 
         let pwdWeak = false, pwdMedium = false, pwdStrong = false;
 
-        if( this.state.pwdState == 'weak') {
+        if( this.state.pwdState === 'weak') {
             pwdWeak = true;
-        } else if( this.state.pwdState == 'medium') {
+        } else if( this.state.pwdState === 'medium') {
             pwdWeak = true;
             pwdMedium = true;
-        } else if( this.state.pwdState == 'strong') {
+        } else if( this.state.pwdState === 'strong') {
             pwdWeak = true;
             pwdMedium = true;
             pwdStrong = true;
@@ -319,7 +346,7 @@ class RegisterBox extends React.Component {
                     />
                     <small className="danger-error">{ confirmPasswordErr ? confirmPasswordErr : '' }</small>
                 </div>
-
+                
                 <button type='button' className='login-btn' onClick={this.submitRegister.bind(this)}>Registrer</button>
             </div>
         </div>
