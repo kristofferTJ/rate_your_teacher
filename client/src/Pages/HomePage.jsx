@@ -17,11 +17,14 @@ class HomePage extends Component {
   }
 
 
-  updateSearch(e) {
+  updateSearch = (e) => {
     const newSearch = document.getElementById("input").value
     this.setState({ search: newSearch })
   }
 
+  setUni = (university) => {
+    this.setState({ uni: university })
+  }
 
   render() {
     return (
@@ -36,12 +39,11 @@ class HomePage extends Component {
               <button type="submit" value="" onClick={this.updateSearch} className="searchButton"></button>
             </div>
             <p>Filtrer på <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              <Dropdown.Item onClick={this.setUni.bind(this, "NTNU")} >NTNU</Dropdown.Item>
+              <Dropdown.Item onClick={this.setUni.bind(this, "UIO")}>Universitetet i Oslo</Dropdown.Item>
             </DropdownButton> og eller <a href="nrk.no">fag</a></p>
           </div>
-          <Teachers search={this.state.search} uni="" course="" />
+          <Teachers search={this.state.search} uni={this.state.uni} course="" />
         </div>
       </div>
     );

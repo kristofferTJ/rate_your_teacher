@@ -87,6 +87,7 @@ a{
 
 .teacher_info p{
   margin: 0;
+  display: inline;
 }
 
 .teacher_total_grade{

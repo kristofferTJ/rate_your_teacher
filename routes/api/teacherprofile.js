@@ -31,7 +31,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // @route   POST api/teacherprofile
-// @desc    Create or update user profile
+// @desc    Create or update teacher profile
 // @access  Private
 
 router.post('/', auth, [
@@ -50,7 +50,7 @@ router.post('/', auth, [
     profileFields.user = req.user.id;
     if (university) profileFields.university = university;
     if (bio) profileFields.bio = bio;
-    if (courses) profileFields.courses = courses;
+    //if (courses) profileFields.courses = courses;
 
     try {
       let profile = await TeacherProfile.findOne({ user: req.user.id });
@@ -84,10 +84,13 @@ router.post('/', auth, [
 
 router.get('/', async (req, res) => {
   try {
-    const profiles = await TeacherProfile.find().populate('user', [
-      'name',
-      'avatar',
-    ]);
+    var profiles = await TeacherProfile.find()
+
+      .populate('courses', ['name', 'coursecode'])
+      .populate('user', ['name', 'avatar']);
+
+    var ids = profiles.courses;
+    console.log(ids);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -180,13 +183,30 @@ router.put('/course/:course_id', auth, async (req, res) => {
       return res.status(400).json({ msg: 'The Course is not in our database' });
     }
     currentCourses.unshift(course._id);
-    teacher.courses = currentCourses;
-    await teacher.save();
-    if (!course.teachers.some((t) => t._id.toString() === req.user.id)) {
-      course.teachers.unshift(req.user.id);
-      await course.save();
+
+    await TeacherProfile.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: { courses: currentCourses } },
+      { new: true }
+    );
+
+    var teach = course.teachers;
+
+    if (!teach.some((t) => t._id.toString() === teacher._id)) {
+      teach.unshift(teacher._id);
+      console.log(teach);
+      await Course.findOneAndUpdate(
+        { _id: req.params.course_id },
+        { $set: { teachers: teach } },
+        { new: true }
+      );
     }
-    res.json(teacher.populate('courses.course', ['name', 'coursecode']));
+
+    res.json(
+      await TeacherProfile.findById(req.user.id).populate(
+        ('courses', ['name', 'coursecode'])
+      )
+    );
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
