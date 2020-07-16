@@ -27,19 +27,25 @@ class Teachers extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        return { search: props.search, uni: props.uni };
+        return { search: props.search, uni: props.uni, course: props.course };
     }
 
 
     render() {
 
-        console.log("props" + this.props.uni)
-        console.log("uni" + this.state.uni)
 
         return (
             < div title="Forelesere" className="teachers " >
                 {
-                    this.state.teachers.filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
+                    this.state.teachers.filter((teacher) => {
+                        if (teacher.courses.filter((course) => {
+                            if (course.name === this.state.course || this.state.course === "") {
+                                return course
+                            }
+                        }).length > 0) {
+                            return teacher
+                        }
+                    }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
                         <Link className="link" to="/teacherPage">
                             <div className="teacher" key={teacher}>
                                 <img alt="avatar" src={teacher.user.avatar}></img>

@@ -85,9 +85,12 @@ a{
 
 .filter{
   display: flex;
+  margin:auto;
+  max-width: 350px;
 }
 
-#dropdown-basic-button{
+
+#dropdown-basic-button-uni{
   font-size: 20px;
   height: 25px;
   background-color: rgba(255,255,255,0);
@@ -101,29 +104,52 @@ a{
   background-size: 20px;
   margin-bottom: 50px;
   margin-top: 20px;
+  cursor: pointer;
 }
 
-#dropdown-basic-button:focus{
+#dropdown-basic-button-uni:focus{
+  outline:none;
+}
+
+#dropdown-basic-button-cource{
+  font-size: 20px;
+  height: 25px;
+  background-color: rgba(255,255,255,0);
+  border: none;
+  color: #002FD4;
+  width: 65px;
+  text-align: left;
+  background-image: url("arrow.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#dropdown-basic-button-cource:focus{
   outline:none;
 }
 
 div[class="dropdown-menu show"]{
-  border: black 1px solid;
   max-height: 200px;
   overflow: scroll;
   border-radius: 5px;
 }
 
 .dropdownItem{
-  background-color: rgb(148, 148, 148);
+  background-color: white;
   color: black;
   display: block;
   font-size: 15px;
   padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .dropdownItem:hover{
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(207, 204, 204);
 }
 
 
