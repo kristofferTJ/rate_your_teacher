@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react'
 import Teachers from "../Components/Teachers";
 import Navbar from "../Components/Navbar";
 import '../App.css';
-
-
-const uniOptions = [
-  { key: 'ntnu', value: 'ntnu', text: 'ntnu' },
-  { key: 'uio', value: 'uio', text: 'Universitetet i Oslo' },
-]
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 class HomePage extends Component {
   constructor(props) {
@@ -16,10 +11,11 @@ class HomePage extends Component {
     this.state = {
       search: "",
       uni: "",
-      course: ""
+      course: "",
     }
     this.updateSearch = this.updateSearch.bind(this)
   }
+
 
   updateSearch(e) {
     const newSearch = document.getElementById("input").value
@@ -39,7 +35,11 @@ class HomePage extends Component {
               <input type="text" className="searchbar" id="input" placeholder="Søk etter foreleseren etter navn"></input>
               <button type="submit" value="" onClick={this.updateSearch} className="searchButton"></button>
             </div>
-            <p>Filtrer på <Dropdown placeholder="Universitet" fluid search selection options={uniOptions} /> og eller <a href="nrk.no">fag</a></p>
+            <p>Filtrer på <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </DropdownButton> og eller <a href="nrk.no">fag</a></p>
           </div>
           <Teachers search={this.state.search} uni="" course="" />
         </div>
