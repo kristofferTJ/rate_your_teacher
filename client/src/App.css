@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgba(124, 128, 131, 0.651);
+  background-color: rgb(165, 165, 165);
   min-height: 100vh;
 }
 
@@ -45,6 +45,18 @@ a{
   margin: auto;
 }
 
+.minForeleser p {
+  font-size: 20px;
+  margin-bottom: 50px;
+  
+}
+
+.minForeleser h1{
+  font-size: 50px;
+  margin-bottom: 10px
+}
+
+
 .search{
   margin: 50px;
   display: flex;
@@ -71,15 +83,49 @@ a{
   padding: 0;
 }
 
-.minForeleser p {
-  font-size: 20px;
-  margin-bottom: 50px;
+.filter{
+  display: flex;
 }
 
-.minForeleser h1{
-  font-size: 50px;
-  margin-bottom: 10px
+#dropdown-basic-button{
+  font-size: 20px;
+  height: 25px;
+  background-color: rgba(255,255,255,0);
+  border: none;
+  color: #002FD4;
+  width: 125px;
+  text-align: left;
+  background-image: url("arrow.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
+
+#dropdown-basic-button:focus{
+  outline:none;
+}
+
+div[class="dropdown-menu show"]{
+  border: black 1px solid;
+  max-height: 200px;
+  overflow: scroll;
+  border-radius: 5px;
+}
+
+.dropdownItem{
+  background-color: rgb(148, 148, 148);
+  color: black;
+  display: block;
+  font-size: 15px;
+  padding: 2px;
+}
+
+.dropdownItem:hover{
+  background-color: rgb(231, 231, 231);
+}
+
 
 .teacher_info h1{
   margin: 0;
