@@ -81,7 +81,7 @@ class HomePage extends Component {
               <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "UIO")}>Universitetet i Oslo</Dropdown.Item>
             </DropdownButton> <p>og eller </p><DropdownButton className="dropdown" id="dropdown-basic-button-cource" title={textCourse}>
                 <Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, "")}>Fag</Dropdown.Item>
-                {this.state.courses.map(course => (<Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, course.name)}>{course.name}</Dropdown.Item>))}
+                {this.state.courses.map(course => (<Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, course.coursecode)}>{course.coursecode} {course.name}</Dropdown.Item>))}
               </DropdownButton></div>
           </div>
           <Teachers search={this.state.search} uni={this.state.uni} course={this.state.course} />

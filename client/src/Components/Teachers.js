@@ -33,13 +33,16 @@ class Teachers extends Component {
 
     render() {
 
+        console.log("prop" + this.props.course)
 
         return (
+
+
             <div>
                 {
                     (this.state.teachers.filter((teacher) => {
                         if (teacher.courses.filter((course) => {
-                            if (course.name === this.state.course || this.state.course === "") {
+                            if (course.coursecode === this.state.course || this.state.course === "") {
                                 return course
                             }
                         }).length > 0) {
@@ -52,7 +55,7 @@ class Teachers extends Component {
                             {
                                 this.state.teachers.filter((teacher) => {
                                     if (teacher.courses.filter((course) => {
-                                        if (course.name === this.state.course || this.state.course === "") {
+                                        if (course.coursecode === this.state.course || this.state.course === "") {
                                             return course
                                         }
                                     }).length > 0) {
