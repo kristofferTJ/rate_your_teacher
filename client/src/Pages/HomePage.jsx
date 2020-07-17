@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class HomePage extends Component {
           </div>
           <Teachers search={this.state.search} uni={this.state.uni} course={this.state.course} />
         </div>
+        <Link to="/NewTeacher"><button className="footerNewTeacher">Ny foreleser</button></Link>
       </div>
     );
   }

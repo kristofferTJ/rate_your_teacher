@@ -90,6 +90,34 @@ a{
   max-width: 380px;
 }
 
+.footerNewTeacher{
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+  background-color: #2C98F0;
+  width: 150px;
+  right: 0;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.footerNewTeacher:active{
+  
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.footerNewTeacher:focus{
+  outline: none;
+}
+
 
 #dropdown-basic-button-uni{
   font-size: 20px;
