@@ -43,6 +43,27 @@ class HomePage extends Component {
   }
 
   render() {
+
+    const setTextUni = () => {
+      if (this.state.uni === "") {
+        textUni = "Universitet"
+      } else {
+        textUni = this.state.uni
+      }
+    }
+    var textUni = ""
+    setTextUni();
+
+    const setTextCourse = () => {
+      if (this.state.course === "") {
+        textCourse = "Fag"
+      } else {
+        textCourse = this.state.course
+      }
+    }
+    var textCourse = ""
+    setTextCourse();
+
     return (
 
       <div className="App">
@@ -54,10 +75,12 @@ class HomePage extends Component {
               <input type="text" className="searchbar" id="input" placeholder="Søk etter foreleseren etter navn"></input>
               <button type="submit" value="" onClick={this.updateSearch} className="searchButton"></button>
             </div>
-            <div className="filter"><p>Filtrer på </p><DropdownButton className="dropdown" id="dropdown-basic-button-uni" title="Universitet">
+            <div className="filter"><p>Filtrer på </p><DropdownButton className="dropdown" id="dropdown-basic-button-uni" title={textUni}>
+              <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "")}>Universitet</Dropdown.Item>
               <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "NTNU")} >NTNU</Dropdown.Item>
               <Dropdown.Item className="dropdownItem" onClick={this.setUni.bind(this, "UIO")}>Universitetet i Oslo</Dropdown.Item>
-            </DropdownButton> <p>og eller </p><DropdownButton className="dropdown" id="dropdown-basic-button-cource" title="Fag">
+            </DropdownButton> <p>og eller </p><DropdownButton className="dropdown" id="dropdown-basic-button-cource" title={textCourse}>
+                <Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, "")}>Fag</Dropdown.Item>
                 {this.state.courses.map(course => (<Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, course.name)}>{course.name}</Dropdown.Item>))}
               </DropdownButton></div>
           </div>
