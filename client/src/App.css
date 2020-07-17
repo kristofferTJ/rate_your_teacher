@@ -226,7 +226,7 @@ div[class="dropdown-menu show"]{
 
 .noResult button:active{
   
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
   
 }
 
