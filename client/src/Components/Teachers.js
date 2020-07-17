@@ -35,9 +35,9 @@ class Teachers extends Component {
 
 
         return (
-            < div title="Forelesere" className="teachers " >
+            <div>
                 {
-                    this.state.teachers.filter((teacher) => {
+                    (this.state.teachers.filter((teacher) => {
                         if (teacher.courses.filter((course) => {
                             if (course.name === this.state.course || this.state.course === "") {
                                 return course
@@ -45,19 +45,33 @@ class Teachers extends Component {
                         }).length > 0) {
                             return teacher
                         }
-                    }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
-                        <Link className="link" to="/teacherPage">
-                            <div className="teacher" key={teacher}>
-                                <img alt="avatar" src={teacher.user.avatar}></img>
-                                <div className="teacher_info"><h1>{teacher.user.name}</h1>
-                                    {teacher.courses.map(course => <p>{course.name}, </p>)}
+                    }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).length <= 0) ? (<div className="noResult"><p>Søket ga ingen resultater</p>
+                        <button>Legg til foreleser</button></div>) :
+
+                        (< div title="Forelesere" className="teachers " >
+                            {
+                                this.state.teachers.filter((teacher) => {
+                                    if (teacher.courses.filter((course) => {
+                                        if (course.name === this.state.course || this.state.course === "") {
+                                            return course
+                                        }
+                                    }).length > 0) {
+                                        return teacher
+                                    }
+                                }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
+                                    <Link className="link" to="/teacherPage">
+                                        <div className="teacher" key={teacher}>
+                                            <img alt="avatar" src={teacher.user.avatar}></img>
+                                            <div className="teacher_info"><h1>{teacher.user.name}</h1>
+                                                {teacher.courses.map(course => <p>{course.name}, </p>)}
                                 ved {teacher.university}</div>
-                                <p className="teacher_total_grade">{teacher.grade}</p>
-                            </div>
-                        </Link>
-                    ))
-                }
-            </div >
+                                            <p className="teacher_total_grade">{teacher.grade}</p>
+                                        </div>
+                                    </Link>
+                                ))
+                            }
+                        </div >)
+                }</div>
         );
     }
 }

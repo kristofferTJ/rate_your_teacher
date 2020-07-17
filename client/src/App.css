@@ -208,6 +208,32 @@ div[class="dropdown-menu show"]{
   text-decoration: none;
 }
 
+.noResult{
+  font-size: 20px;
+}
+
+.noResult button{
+  padding: 10px;
+  background-color: #2C98F0;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.noResult button:active{
+  
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.noResult button:focus{
+  outline: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
