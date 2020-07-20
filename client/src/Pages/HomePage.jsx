@@ -87,10 +87,12 @@ class HomePage extends Component {
           </div>
           <Teachers search={this.state.search} uni={this.state.uni} course={this.state.course} />
         </div>
-        <Link to="/NewTeacher"><button className="footerNewTeacher">Ny foreleser</button></Link>
+
       </div>
     );
   }
 }
 
 export default HomePage;
+
+/*<Link to="/NewTeacher"><button className="footerNewTeacher">Ny foreleser</button></Link>*/
