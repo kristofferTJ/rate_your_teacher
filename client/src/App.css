@@ -31,6 +31,7 @@
   border-radius: 50%;
 }
 
+
 .teacher_info{
   grid-column-start: 2;
   grid-row-start: 1;
@@ -79,9 +80,11 @@ a{
   background-repeat: no-repeat;
   border:none;
   margin-top: 3px;
-
-
   padding: 0;
+}
+
+.searchButton:focus{
+  outline: none;
 }
 
 .filter{
