@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const config = require('config');
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
 const Requests = require('../../models/Requests');
 
 // @Todo  Make route public, different depending on who wants to see profile
-
 
 // @route   POST api/request
 // @desc    Create request

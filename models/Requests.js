@@ -12,10 +12,7 @@ const RequestSchema = new mongoose.Schema({
     course: {
         type: String,
     },
-    date: {
-        type: Date,
-        default: Date.now,
-    }
+
 });
 
 module.exports = Requests = mongoose.model(
