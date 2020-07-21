@@ -5,15 +5,35 @@ const TeacherProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
+  name: {
+    type: String,
+    //required: true,
+  },
+  university: {
+    type: String,
+    required: true,
+  },
+
+  bio: {
+    type: String,
+  },
   courses: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'course',
-    },
-  ],
-  /*
-      
-      rating: [
+      course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'course',
+        unique: true,
+      },
+      name: {
+        type: String,
+      },
+      coursecode: {
+        type: String,
+      },
+      semester: {
+        type: String,
+      },
+      ratings: [
         {
           user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -29,19 +49,10 @@ const TeacherProfileSchema = new mongoose.Schema({
             type: Number,
           },
         },
-        */
-  name: {
-    type: String,
-    required: String,
-  },
-  university: {
-    type: String,
-    required: String,
-  },
+      ],
+    },
+  ],
 
-  bio: {
-    type: String,
-  },
   experience: [
     {
       title: {

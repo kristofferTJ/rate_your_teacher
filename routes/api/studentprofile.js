@@ -85,4 +85,57 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
+router.put('/:teacher_id/:course_id', auth, async (req, res) => {
+  const { communication, knowledge, assistance } = req.body;
+
+  const newRating = {
+    user: req.user.id,
+    communication,
+    knowledge,
+    assistance,
+  };
+
+  try {
+    const teacher = await TeacherProfile.findById(req.params.teacher_id);
+    const C = await Course.findById(req.params.course_id);
+    if (!C) {
+      return res
+        .status(404)
+        .json({ msg: 'This course is not in our database' });
+    }
+    if (teacher) {
+      var course = teacher.courses.find((cour) => {
+        return cour._id.toString() === req.params.course_id;
+      });
+      if (!course) {
+        return res
+          .status(404)
+          .json({ msg: 'This teacher does not have this subject' });
+      }
+      var ratings = course.ratings;
+
+      if (ratings.some((rate) => rate.user == req.user.id)) {
+        console.log('nope');
+        ratings = ratings.filter((obj) => {
+          obj.user.toString() !== req.user.id;
+        });
+      }
+      ratings.unshift(newRating);
+
+      teacher.ratings = ratings;
+
+      await teacher.save();
+
+      return res.json(ratings);
+    }
+    res.status(404).json({ msg: 'Could not find teacher' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Course/Teacher not found' });
+    }
+    res.status(404).json({ msg: 'Page not found' });
+  }
+});
+
 module.exports = router;
