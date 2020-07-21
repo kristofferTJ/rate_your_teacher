@@ -33,6 +33,7 @@ class Teachers extends Component {
 
     render() {
 
+        console.log(this.state.teachers)
 
         return (
             < div title="Forelesere" className="teachers " >
