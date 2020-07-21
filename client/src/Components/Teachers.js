@@ -45,7 +45,7 @@ class Teachers extends Component {
                             if (course.coursecode === this.state.course || this.state.course === "") {
                                 return course
                             }
-                        }).length > 0) {
+                        }).length > 0 || teacher.courses.length == 0) {
                             return teacher
                         }
                     }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).length <= 0) ? (<div className="noResult"><p>Søket ga ingen resultater</p>
@@ -58,7 +58,7 @@ class Teachers extends Component {
                                         if (course.coursecode === this.state.course || this.state.course === "") {
                                             return course
                                         }
-                                    }).length > 0) {
+                                    }).length > 0 || teacher.courses.length == 0) {
                                         return teacher
                                     }
                                 }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
