@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('config');
 const auth = require('../../middleware/auth');
+const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
 
 const TeacherProfile = require('../../models/TeacherProfile');
@@ -85,18 +86,81 @@ router.post('/', auth, [
 router.get('/', async (req, res) => {
   try {
     var profiles = await TeacherProfile.find()
-
-      .populate('courses', ['name', 'coursecode'])
+      // .populate({
+      //   path: 'courses.course',
+      //   select: ['coursecode'],
+      //   model: 'course',
+      // })
       .populate('user', ['name', 'avatar']);
 
-    var ids = profiles.courses;
-    console.log(ids);
+    const teachers = [];
+    let profile = [];
+    let course = [];
+    let cor = {};
+
+    for (let i = 0; i < profiles.length; i++) {
+      arr = [];
+      profile = profiles[i];
+      for (let j = 0; j < profile.courses.length; j++) {
+        course = profile.courses[j];
+        //console.log(course);
+        cor = await Course.findById(course._id);
+        if (cor) {
+          let populated = {
+            course: cor._id,
+            name: cor.name,
+            semester: cor.semester,
+            coursecode: cor.coursecode,
+          };
+          arr.push(populated);
+          //console.log(arr);
+        }
+      }
+      profile[arr] = arr;
+      teachers.push(profile);
+      console.log(profile[arr]);
+    }
+    console.log(teachers);
+
+    // profiles.forEach((profile) => {
+    //   var coursearray = [];
+    //   profile.coursearray = coursearray;
+    //   profile.courses.forEach(async (course) => {
+    //     var cor = await Course.findOne({ _id: course._id }).select([
+    //       'name',
+    //       'coursecode',
+    //     ]);
+    //     if (cor) {
+    //       var populated = {
+    //         _id: course._id,
+    //         name: cor.name,
+    //         coursecode: cor.coursecode,
+    //       };
+    //       console.log(populated);
+    //       coursearray.unshift(populated);
+    //       console.log(coursearray);
+    //     }
+    //   });
+    //   if (coursearray.length > 0) {
+    //     profile[coursearray] = coursearray;
+    //     console.log(profile);
+    //   }
+
+    //console.log(populated);
+
+    // profile.courses.course = populated;
+    // console.log(profile.courses.course);
+    // console.log(profile.courses);
+    // console.log(profile);
+
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
 });
+
+mongoose.set('debug', true);
 
 // @route   GET api/profile/user/:user_id
 // @desc    Get profile by user ID
@@ -182,31 +246,29 @@ router.put('/course/:course_id', auth, async (req, res) => {
     if (!course) {
       return res.status(400).json({ msg: 'The Course is not in our database' });
     }
-    currentCourses.unshift(course._id);
 
-    await TeacherProfile.findOneAndUpdate(
-      { user: req.user.id },
-      { $set: { courses: currentCourses } },
-      { new: true }
-    );
+    const newCourse = {
+      _id: course._id,
+      coursecode: course.coursecode,
+      name: course.name,
+      semester: course.semester,
+      year: course.year,
+      rating: [],
+    };
 
-    var teach = course.teachers;
+    currentCourses.unshift(newCourse);
 
-    if (!teach.some((t) => t._id.toString() === teacher._id)) {
-      teach.unshift(teacher._id);
-      console.log(teach);
-      await Course.findOneAndUpdate(
-        { _id: req.params.course_id },
-        { $set: { teachers: teach } },
-        { new: true }
-      );
+    teacher.courses = currentCourses;
+    await teacher.save();
+
+    if (
+      !course.teachers.some((t) => t._id.toString() === teacher._id.toString())
+    ) {
+      course.teachers.unshift(teacher._id);
+      await course.save();
     }
 
-    res.json(
-      await TeacherProfile.findById(req.user.id).populate(
-        ('courses', ['name', 'coursecode'])
-      )
-    );
+    res.json(course);
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
