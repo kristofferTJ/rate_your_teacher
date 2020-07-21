@@ -16,7 +16,6 @@ class NewTeacherPage extends Component {
         this.handleChangeName = this.handleChangeName.bind(this)
         this.handleChangeUni = this.handleChangeUni.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.add = this.add.bind(this)
     }
 
     handleChangeName(event) {
@@ -57,30 +56,6 @@ class NewTeacherPage extends Component {
         }
     }
 
-    async add() {
-        try {
-
-
-            const config = {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }
-            const body = JSON.stringify(this.state)
-
-
-
-            const res = await axios.post('http://localhost:8000/api/request/', body, config)
-            console.log(res.data)
-        } catch (err) {
-            if (err.response.data.errors[0].msg === "User already exists ") {
-                this.showValidationError('email', err.response.data.errors[0].msg)
-            } else if (err.response.data.errors[0].msg === "Please enter a password with 6 or more characters")
-                this.showValidationError('password', err.response.data.errors[0].msg)
-        }
-    }
-
-
     render() {
 
         return (
@@ -88,7 +63,7 @@ class NewTeacherPage extends Component {
                 <Navbar />
                 <h1>Ny foreleser</h1>
                 <h2>Skriv inn informasjon om foreleseren så skal vi vurdere forespørselen</h2>
-                <form onSubmit={this.add}>
+                <form onSubmit={this.handleSubmit}>
                     <label for="inputName">Navn
                     <input id="inputName" type="text" onChange={this.handleChangeName} required></input></label>
                     <label for="inputUni">Skole

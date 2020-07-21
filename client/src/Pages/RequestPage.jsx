@@ -16,7 +16,7 @@ class RequestPage extends Component {
 
         this.setState({ isLoading: true })
 
-        fetch("http://localhost:8000/api/request/")
+        fetch("http://localhost:8000/api/requests/")
             .then(res => res.text())
             .then(res => this.setState({ requests: JSON.parse(res) }))
             .then(this.setState({ isLoading: false }))

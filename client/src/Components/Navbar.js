@@ -5,7 +5,7 @@ function App() {
     return (
         <div className="navbar">
             <Link className="navbarLink" to="/"><p><img alt="logo"></img></p></Link>
-            <p>Om oss</p>
+            <Link className="navbarLink" to="/OmOss"><p>Om oss</p></Link>
             <p>Kontakt</p>
             <Link className="navbarLink" to="/LoggInn"><p>Logg inn</p></Link>
         </div>

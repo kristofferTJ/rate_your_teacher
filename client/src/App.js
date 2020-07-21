@@ -13,6 +13,7 @@ import NotFoundPage from './Pages/NotFoundPage';
 import TeacherPage from './Pages/TeacherPage';
 import NewTeacherPage from './Pages/NewTeacherPage';
 import RequestPage from './Pages/RequestPage';
+import OmOss from './Pages/RequestPage';
 
 
 class AppTemp extends Component {
@@ -27,6 +28,7 @@ class AppTemp extends Component {
           <Route exact path='/TeacherPage' component={TeacherPage} />
           <Route exact path='/NewTeacher' component={NewTeacherPage} />
           <Route exact path='/Request' component={RequestPage} />
+          <Route exact path='/OmOss' component={OmOss} />
           <Redirect to='/404' />
         </Switch>
       </Router>
