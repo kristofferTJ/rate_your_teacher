@@ -27,8 +27,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required').exists(),
+    check('email', 'Emailen er ikke gyldig!').isEmail(),
+    check('password', 'Passordfeltet kan ikke være tomt').exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -45,7 +45,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Ivalid Credentials' }] });
+          .json({ errors: [{ msg: 'Emailen eksisterer ikke' }] });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -53,7 +53,7 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Ivalid Credentials' }] });
+          .json({ errors: [{ msg: 'Feil passord' }] });
       }
 
       // Return jsonwebtoken
