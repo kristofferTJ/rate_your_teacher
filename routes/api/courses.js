@@ -14,13 +14,11 @@ const Course = require('../../models/Course');
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    var courses = await Course.find().populate({
+    const courses = await Course.find().populate({
       path: 'teachers',
-      select: 'name',
+      select: 'bio',
       model: 'teacherprofile',
     });
-
-    console.log(courses[0].teachers);
 
     res.json(courses);
   } catch (err) {
@@ -71,7 +69,7 @@ router.post(
         return res.json(tmpC);
       }
 
-      tmpC = Course(CourseFields);
+      tmpC = new Course(CourseFields);
 
       await tmpC.save();
       res.json(tmpC);

@@ -170,14 +170,14 @@
 
 .teacher{
   background-color: white;
-  width: 80%;
-  height: 300px;
+  width: 90%;
+  height: 320px;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   display: grid;
-  grid-template-rows:33% 66%;
-  grid-template-columns:33% 66%;
+  grid-template-rows:40% 60%;
+  grid-template-columns:40% 60%;
 }
 
 .teacher img{
@@ -185,14 +185,41 @@
   margin-top: 0;
   grid-column-start: 1;
   grid-row-start: 1;
-  width: 100%;
+  width: 80%;
   padding: 5px;
+  border-radius: 50%;
 }
+
 
 .teacher_info{
   grid-column-start: 2;
   grid-row-start: 1;
+  margin: auto;
+}
+
+.teacher_info h1{
+  font-size: 27px;
+  margin: 5px;
   
+}
+
+.teacher_total_grade{
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+
+.teacher_grades{
+  margin: auto;
+}
+
+.teacher_grades p {
+  padding: 5px;
+}
+
+.grade{
+  display: inline;
+  font-weight: 700;
 }
 
 a{
@@ -237,15 +264,45 @@ a{
   background-repeat: no-repeat;
   border:none;
   margin-top: 3px;
-
-
   padding: 0;
+}
+
+.searchButton:focus{
+  outline: none;
 }
 
 .filter{
   display: flex;
   margin:auto;
-  max-width: 350px;
+  max-width: 380px;
+}
+
+.footerNewTeacher{
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+  background-color: #2C98F0;
+  width: 150px;
+  right: 0;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.footerNewTeacher:active{
+  
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.footerNewTeacher:focus{
+  outline: none;
 }
 
 
@@ -255,7 +312,8 @@ a{
   background-color: rgba(255,255,255,0);
   border: none;
   color: #002FD4;
-  width: 125px;
+  /*width: 125px;*/
+  padding-right: 20px;
   text-align: left;
   background-image: url("arrow.png");
   background-repeat: no-repeat;
@@ -276,7 +334,8 @@ a{
   background-color: rgba(255,255,255,0);
   border: none;
   color: #002FD4;
-  width: 65px;
+  /*width: 65px;*/
+  padding-right: 20px;
   text-align: left;
   background-image: url("arrow.png");
   background-repeat: no-repeat;
@@ -362,6 +421,32 @@ div[class="dropdown-menu show"]{
 .link{
   color: black;
   text-decoration: none;
+}
+
+.noResult{
+  font-size: 20px;
+}
+
+.noResult button{
+  padding: 10px;
+  background-color: #2C98F0;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.noResult button:active{
+  
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.noResult button:focus{
+  outline: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
