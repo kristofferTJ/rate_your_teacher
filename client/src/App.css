@@ -51,14 +51,14 @@
 
 .teacher{
   background-color: white;
-  width: 80%;
-  height: 300px;
+  width: 90%;
+  height: 320px;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   display: grid;
-  grid-template-rows:33% 66%;
-  grid-template-columns:33% 66%;
+  grid-template-rows:40% 60%;
+  grid-template-columns:40% 60%;
 }
 
 .teacher img{
@@ -66,7 +66,7 @@
   margin-top: 0;
   grid-column-start: 1;
   grid-row-start: 1;
-  width: 100%;
+  width: 80%;
   padding: 5px;
   border-radius: 50%;
 }
@@ -75,7 +75,32 @@
 .teacher_info{
   grid-column-start: 2;
   grid-row-start: 1;
+  margin: auto;
+}
+
+.teacher_info h1{
+  font-size: 27px;
+  margin: 5px;
   
+}
+
+.teacher_total_grade{
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+
+.teacher_grades{
+  margin: auto;
+}
+
+.teacher_grades p {
+  padding: 5px;
+}
+
+.grade{
+  display: inline;
+  font-weight: 700;
 }
 
 a{
