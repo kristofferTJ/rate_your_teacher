@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom';
+import setAuthToken from './utils/setAuthToken'
+import { loadUser } from './actions/auth'
+import './App.css'
 
 //Pages
 import HomePage from './Pages/HomePage';
@@ -13,11 +16,24 @@ import NotFoundPage from './Pages/NotFoundPage';
 import TeacherPage from './Pages/TeacherPage';
 import NewTeacherPage from './Pages/NewTeacherPage';
 
+//Redux
+import { Provider } from 'react-redux'
+import store from './store'
 
-class AppTemp extends Component {
+//Kan hende dette er feil. Se "Set user and load Auth token"
+if (localStorage.token) {
+  setAuthToken(localStorage.token)
+}
 
-  render() {
-    return (
+const App = () => {
+
+  useEffect(() => {
+    console.log('test')
+    store.dispatch(loadUser())
+  }, [])
+
+  return (
+    <Provider store={store}>
       <Router>
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -28,8 +44,8 @@ class AppTemp extends Component {
           <Redirect to='/404' />
         </Switch>
       </Router>
-    );
-  }
+    </Provider>
+  );
 }
 
-export default AppTemp;
+export default App;
