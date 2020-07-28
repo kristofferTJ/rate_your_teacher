@@ -34,6 +34,7 @@ class NewTeacherPage extends Component {
     }
 
     async handleSubmit(event) {
+        event.preventDefault();
         try {
             const config = {
                 headers: {
@@ -48,6 +49,7 @@ class NewTeacherPage extends Component {
             const res = await axios.post('http://localhost:8000/api/requests/', body, config)
             //this.showValidationError('email', "User registered")
             console.log(res.data)
+            this.props.history.push('/SentRequest')
 
         } catch (err) {
             if (err.response.data.errors[0].msg === "User already exists ") {
@@ -77,8 +79,7 @@ class NewTeacherPage extends Component {
                     <br></br>
                     <input className="submitTeacher" type="submit" value="Send inn"></input>
                 </form>
-                <div>
-                </div>
+
             </div>
         );
     }
