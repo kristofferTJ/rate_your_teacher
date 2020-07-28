@@ -33,21 +33,21 @@ class NewTeacherPage extends Component {
         console.log("course")
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         try {
             const config = {
                 headers: {
                     'Content-type': 'application/json'
                 }
             }
-            const body = JSON.stringify(this.state.name + this.state.uni + this.state.course)
+            const body = JSON.stringify(this.state)
 
             console.log("body" + body)
 
-            /*
-            const res = await axios.post('http://localhost:8000/api/users', body, config)
-            this.showValidationError('email', "User registered")
-            //  console.log(res.data)*/
+
+            const res = await axios.post('http://localhost:8000/api/requests/', body, config)
+            //this.showValidationError('email', "User registered")
+            console.log(res.data)
         } catch (err) {
             if (err.response.data.errors[0].msg === "User already exists ") {
                 this.showValidationError('email', err.response.data.errors[0].msg)

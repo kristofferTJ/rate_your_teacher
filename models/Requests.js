@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const RequestSchema = new mongoose.Schema({
+const RequestsSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+    },
     name: {
         type: String,
         required: String,
@@ -12,10 +16,13 @@ const RequestSchema = new mongoose.Schema({
     course: {
         type: String,
     },
-
+    date: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = Requests = mongoose.model(
     'requests',
-    RequestSchema
+    RequestsSchema
 );
