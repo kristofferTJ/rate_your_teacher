@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from "../Components/Navbar";
 import '../App.css';
 import GradeCard from "../Components/GradeCard"
+import bilde from "../avatar.png"
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -35,14 +36,19 @@ class TeacherPage extends Component {
             <div className="App">
                 <Navbar />
                 <div className="teacherPage" >
-                    <img alt="avatar" ></img>
+                    <img alt="avatar" src={bilde}></img>
                     <div className="teacherInformation">
                         <h1 >Jane Austen</h1>
-                        <h4 >Underviser mattematikk 1 ved NTNU</h4>
+                        <h4 >Underviser matematikk 1 ved NTNU</h4>
                     </div>
+                    <button className="giVurdering">Gi vurdering</button>
+                    <div className="menu">
+                        <h3 className="item1">Karakterkort</h3>
+                        <h3 className="item2">Annen undervisning</h3>
+                        <h3 className="item3">Vurderinger</h3>
+                    </div>
+                <GradeCard/>
                 </div>
-                <GradeCard />
-                <GradeCard />
             </div>
         )
     }
