@@ -282,6 +282,56 @@ div[class="dropdown-menu show"]{
   color: #61dafb;
 }
 
+.newTeacher{
+  font-size: 25px;
+  max-width: 600px;
+  margin:auto;
+}
+
+.newTeacher input{
+  width: 300px;
+  margin: 20px;
+  height: 29px;
+  font-size: 18px;
+  border: none;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 18px 0 rgba(0, 0, 0, 0.19);
+}
+
+.newTeacher input:focus{
+  outline:none;
+}
+
+.newTeacher label{
+  margin: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.submitTeacher{
+  height: 45px !important;
+  background-color: #2C98F0;
+  width: 150px;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  margin:auto;
+}
+
+.submitTeacher:active{
+  
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.submitTeacher:focus{
+  outline: none;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

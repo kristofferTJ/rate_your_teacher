@@ -48,6 +48,7 @@ class NewTeacherPage extends Component {
             const res = await axios.post('http://localhost:8000/api/requests/', body, config)
             //this.showValidationError('email', "User registered")
             console.log(res.data)
+
         } catch (err) {
             if (err.response.data.errors[0].msg === "User already exists ") {
                 this.showValidationError('email', err.response.data.errors[0].msg)
@@ -63,18 +64,20 @@ class NewTeacherPage extends Component {
                 <Navbar />
                 <h1>Ny foreleser</h1>
                 <h2>Skriv inn informasjon om foreleseren så skal vi vurdere forespørselen</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label for="inputName">Navn
+                <form className="newTeacher" onSubmit={this.handleSubmit}>
+                    <label for="inputName">Navn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input id="inputName" type="text" onChange={this.handleChangeName} required></input></label>
-                    <label for="inputUni">Skole
+                    <br></br>
+                    <label for="inputUni">Skole&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input required id="inputUni" onChange={this.handleChangeUni}>
                         </input></label>
+                    <br></br>
                     <label for="inputCourse">Tilhørende fag
                     <input id="inputCourse" type="text" onChange={this.handleChangeCourse}></input></label>
-                    <input type="submit" value="Send inn"></input>
+                    <br></br>
+                    <input className="submitTeacher" type="submit" value="Send inn"></input>
                 </form>
                 <div>
-                    <p>{this.state.name} + {this.state.uni} + {this.state.course}</p>
                 </div>
             </div>
         );
