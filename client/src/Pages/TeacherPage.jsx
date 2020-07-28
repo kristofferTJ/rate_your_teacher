@@ -31,13 +31,18 @@ class TeacherPage extends Component {
     render() {
         const teacher = this.state.teacher
         const user = this.state.user
-        console.log(teacher)
         return (
             <div className="App">
+                <Navbar />
                 <div className="teacherPage" >
-                    <Navbar />
-                    <GradeCard />
-                </div >
+                    <img alt="avatar" ></img>
+                    <div className="teacherInformation">
+                        <h1 >Jane Austen</h1>
+                        <h4 >Underviser mattematikk 1 ved NTNU</h4>
+                    </div>
+                </div>
+                <GradeCard />
+                <GradeCard />
             </div>
         )
     }

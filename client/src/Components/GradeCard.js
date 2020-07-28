@@ -8,47 +8,42 @@ function GradeCard() {
         <Card className="GradeCard">
             <h1>Karakterkort</h1>
             <div className="totalGrade">
-                <Grade grade="A" >A</Grade>
+                <Grade grade="A" />
+                <h3>Total Karakter</h3> 
             </div>
-            <h3>Total Karakter</h3>
 
-            <div className="column1">
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="A" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="C" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="B" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="D" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-            </div>
-
-            <div className="column2">
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="A" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="C" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="B" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-                <div className="grade">
+                <div className="grades">
                     <Grade grade="D" />
                     <h3>Fagkunnskaper</h3>
                 </div>
-            </div>
         </Card>
     )
 }
