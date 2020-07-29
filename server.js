@@ -21,7 +21,9 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/teacherprofile', require('./routes/api/teacherprofile'));
 app.use('/api/studentprofile', require('./routes/api/studentprofile'));
 app.use('/api/courses', require('./routes/api/courses'));
+app.use('/api/requests', require('./routes/api/requests'));
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+

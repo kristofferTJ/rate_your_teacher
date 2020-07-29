@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from "../Components/Navbar";
 import '../App.css';
+import GradeCard from "../Components/GradeCard"
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -30,16 +31,25 @@ class TeacherPage extends Component {
     render() {
         const teacher = this.state.teacher
         const user = this.state.user
-        console.log(teacher)
         return (
             <div className="App">
-                < div className="teacherPage" >
-                    <Navbar />
-                    <img alt="avatar" src={user.avatar}></img>
-                    <h1>{user.name}</h1>
-                </div >
+                <Navbar />
+                <div className="teacherPage" >
+                    <img alt="avatar" ></img>
+                    <div className="teacherInformation">
+                        <h1 >Jane Austen</h1>
+                        <h4 >Underviser mattematikk 1 ved NTNU</h4>
+                    </div>
+                </div>
+                <GradeCard />
+                <GradeCard />
             </div>
         )
     }
 }
 export default TeacherPage;
+
+/*
+<img alt="avatar" src={user.avatar}></img> 
+<h1>{user.name}</h1>
+*/
