@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Grade({ grade }) {
     const [backgroundColor, setColor] = useState("#00E540");
@@ -16,13 +16,15 @@ function Grade({ grade }) {
             setColor(() => "#FF6745")
         } else if (grade === "F") {
             setColor(() => "#F82D00")
+        } else if (grade === "Ikke registrert" || grade === "") {
+            setColor(() => "#FFFFFF")
         }
-    },[])
-    
+    }, [])
+
     return (
-            <span style={{backgroundColor}}>
-                <h2>{grade}</h2>
-            </span>
+        <span style={{ backgroundColor }}>
+            <h2>{grade}</h2>
+        </span>
     )
 }
 
