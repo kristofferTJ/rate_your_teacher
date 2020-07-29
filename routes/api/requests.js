@@ -72,17 +72,16 @@ router.get('/', async (req, res) => {
     }
 });
 
-/*
+
 // @route   DELETE api/teacherprofile
 // @desc    Delete teacher profile & user
 // @access  Private
 
-router.delete('/', auth, async (req, res) => {
+router.delete('/:_id', async (req, res) => {
+    console.log("eple")
     try {
         // Remove profile
-        await TeacherProfile.findOneAndDelete({ user: req.user.id });
-        // Remove user
-        await User.findOneAndDelete({ _id: req.user.id });
+        await Requests.findOneAndDelete({ _id: req.params._id });
 
         res.json({ msg: 'User deleted' });
     } catch (err) {
@@ -90,6 +89,24 @@ router.delete('/', auth, async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-*/
+
 
 module.exports = router;
+/*
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        const profile = await TeacherProfile.findOne({
+            user: req.params.user_id,
+        }).populate('user', ['name', 'avatar']);
+
+        if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({ msg: 'Profile not found' });
+        }
+        res.status(500).send('Server error');
+    }
+});*/

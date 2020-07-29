@@ -331,6 +331,42 @@ div[class="dropdown-menu show"]{
   outline: none;
 }
 
+.request{
+  font-size: 22px;
+  
+}
+
+
+.request p{
+  display: inline;
+  margin: 20px;
+}
+
+.request button{
+  display: inline;
+  margin:auto;
+  margin-bottom: 30px;
+  height: 30px;
+  background-color: #2C98F0;
+  width: 120px;
+  color: white;
+  border: none;
+  font-size: 20px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  grid-column-start: 2;
+}
+
+.request button:active{
+  
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2), 0 10px 24px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.request button:focus{
+  outline: none;
+}
 
 @keyframes App-logo-spin {
   from {

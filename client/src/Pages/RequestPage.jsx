@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from "../Components/Navbar";
 import '../App.css';
+import axios from 'axios'
+
 
 
 class RequestPage extends Component {
@@ -10,6 +12,7 @@ class RequestPage extends Component {
             requests: [],
             isLoading: false
         }
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount = async () => {
@@ -24,6 +27,34 @@ class RequestPage extends Component {
 
     }
 
+    async handleDelete(req) {
+        try {
+            const config = {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }
+
+            const id = req._id;
+            console.log(id);
+
+            await axios.delete('http://localhost:8000/api/requests/' + id);
+            //this.showValidationError('email', "User registered")
+            console.log("her")
+
+            this.componentDidMount()
+            this.forceUpdate()
+        } catch (err) {
+            console.log("erroor")
+            if
+                (err.response.data.errors[0].msg === "User already exists ") {
+                this.showValidationError('email', err.response.data.errors[0].msg)
+            } else if (err.response.data.errors[0].msg === "Please enter a password with 6 or more characters")
+                this.showValidationError('password', err.response.data.errors[0].msg)
+        }
+    }
+
+
     render() {
         console.log(this.state.requests)
 
@@ -31,6 +62,10 @@ class RequestPage extends Component {
 
             <div className="App">
                 <Navbar />
+                <h1>Forespørsler</h1>
+                <div className="requests">
+                    {this.state.requests.map(req => (<div className="request"><p>{req.name} {req.university} {req.course}</p><button onClick={() => this.handleDelete(req)}>Delete</button></div>))}
+                </div>
             </div>
         );
     }
