@@ -12,6 +12,7 @@ class Teachers extends Component {
             uni: '',
             course: ''
         }
+        this.totalAverage = this.totalAverage.bind(this)
     }
 
     componentDidMount = async () => {
@@ -30,10 +31,82 @@ class Teachers extends Component {
         return { search: props.search, uni: props.uni, course: props.course };
     }
 
+    totalAverage = (teacher) => {
+
+        var grades = 0
+        var gradeCount = 0
+        var avg = 0
+
+        { teacher.courses.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+
+        avg = grades / gradeCount
+
+        if (avg) {
+            return avg
+        }
+        else {
+            return "Ikke registrert"
+        }
+
+    }
+
+    communicationAverage = (teacher) => {
+
+        var grades = 0
+        var gradeCount = 0
+        var avg = 0
+
+        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.communication, gradeCount += 1)) }
+
+        avg = grades / gradeCount
+
+        if (avg) {
+            return avg
+        }
+        else {
+            return ""
+        }
+    }
+
+    knowledgeAverage = (teacher) => {
+
+        var grades = 0
+        var gradeCount = 0
+        var avg = 0
+
+        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.knowledge, gradeCount += 1)) }
+
+        avg = grades / gradeCount
+
+        if (avg) {
+            return avg
+        }
+        else {
+            return ""
+        }
+    }
+
+    assistanceAverage = (teacher) => {
+
+        var grades = 0
+        var gradeCount = 0
+        var avg = 0
+
+        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.assistance, gradeCount += 1)) }
+
+        avg = grades / gradeCount
+
+        if (avg) {
+            return avg
+        }
+        else {
+            return ""
+        }
+    }
+
 
     render() {
 
-        console.log("prop" + this.props.course)
 
         return (
 
@@ -68,7 +141,8 @@ class Teachers extends Component {
                                             <div className="teacher_info"><h1>{teacher.user.name}</h1>
                                                 {teacher.courses.map(course => <p>{course.name}, </p>)}
                                 ved {teacher.university}</div>
-                                            <p className="teacher_total_grade">{teacher.grade}</p>
+                                            <p className="teacher_total_grade">Total karakter <br></br><br></br><p className="grade">{this.totalAverage(teacher)}</p></p>
+                                            <div className="teacher_grades"><p>Kunnskap: <p className="grade">{this.knowledgeAverage(teacher)}</p></p><p>Kommunikasjon: <p className="grade">{this.communicationAverage(teacher)}</p></p><p>Hjelpsomhet: <p className="grade">{this.assistanceAverage(teacher)}</p></p></div>
                                         </div>
                                     </Link>
                                 ))

@@ -15,11 +15,16 @@
     "react-bootstrap": "^1.2.2",
     "react-bootstrap-dropdown": "^0.3.0",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-table": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.2",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "uuid": "^8.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

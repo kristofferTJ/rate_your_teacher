@@ -19,7 +19,7 @@ router.post(
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
-      'Please enter a password with 6 or more characters'
+      'Passordet må være minst 6 karakterer langt'
     ).isLength({
       min: 6,
     }),
@@ -39,7 +39,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists ' }] });
+          .json({ errors: [{ msg: 'Brukeren eksisterer allerede ' }] });
       }
 
       // Get users gravatar
