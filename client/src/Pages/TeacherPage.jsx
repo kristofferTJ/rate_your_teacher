@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from "../Components/Navbar";
 import '../App.css';
 import GradeCard from "../Components/GradeCard"
-import bilde from "../avatar.png"
+import Ratings from "../Components/Ratings"
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -67,6 +67,7 @@ class TeacherPage extends Component {
                         <h3 className="item3">Vurderinger</h3>
                     </div>
                     <GradeCard courses={courses} />
+                    <Ratings />
                 </div>
             </div>
         )
