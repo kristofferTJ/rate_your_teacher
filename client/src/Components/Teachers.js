@@ -13,7 +13,7 @@ class Teachers extends Component {
             uni: '',
             course: ''
         }
-        this.totalAverage = this.totalAverage.bind(this)
+        this.average = this.average.bind(this)
     }
 
     componentDidMount = async () => {
@@ -32,124 +32,26 @@ class Teachers extends Component {
         return { search: props.search, uni: props.uni, course: props.course };
     }
 
-    totalAverage = (teacher) => {
 
+    average = (teacher, skill) => {
         var grades = 0
         var gradeCount = 0
         var avg = 0
 
-        { teacher.courses.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+        if (skill === "total") {
+            { teacher.courses.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+        } else {
+            { teacher.courses.map(course => course.ratings.map(rating => grades += rating[skill], gradeCount += 1)) }
+        }
 
         avg = grades / gradeCount
 
         if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
+
+            return avg
         }
         else {
             return "Ikke registrert"
-        }
-
-    }
-
-    communicationAverage = (teacher) => {
-
-        var grades = 0
-        var gradeCount = 0
-        var avg = 0
-
-        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.communication, gradeCount += 1)) }
-
-        avg = grades / gradeCount
-
-        if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
-        }
-        else {
-            return ""
-        }
-    }
-
-    knowledgeAverage = (teacher) => {
-
-        var grades = 0
-        var gradeCount = 0
-        var avg = 0
-
-        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.knowledge, gradeCount += 1)) }
-
-        avg = grades / gradeCount
-
-        if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
-        }
-        else {
-            return ""
-        }
-    }
-
-    assistanceAverage = (teacher) => {
-
-        var grades = 0
-        var gradeCount = 0
-        var avg = 0
-
-        { teacher.courses.map(course => course.ratings.map(rating => grades += rating.assistance, gradeCount += 1)) }
-
-        avg = grades / gradeCount
-
-        if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
-        }
-        else {
-            return ""
         }
     }
 
@@ -190,8 +92,8 @@ class Teachers extends Component {
                                             <div className="teacher_info"><h1>{teacher.user.name}</h1>
                                                 {teacher.courses.map(course => <p>{course.name}, </p>)}
                                 ved {teacher.university}</div>
-                                            <p className="teacher_total_grade">Total karakter <br></br><br></br><Grade grade={this.totalAverage(teacher)}></Grade></p>
-                                            <div className="teacher_grades"><p> <Grade grade={this.knowledgeAverage(teacher)}></Grade>Kunnskap</p><p> <Grade grade={this.communicationAverage(teacher)}></Grade>Kommunikasjon</p><p> <Grade grade={this.assistanceAverage(teacher)}></Grade>Hjelpsomhet</p></div>
+                                            <p className="teacher_total_grade">Total karakter <br></br><br></br><Grade grade={this.average(teacher, "total")}></Grade></p>
+                                            <div className="teacher_grades"><p> <Grade grade={this.average(teacher, "knowledge")}></Grade>Kunnskap</p><p> <Grade grade={this.average(teacher, "communication")}></Grade>Kommunikasjon</p><p> <Grade grade={this.average(teacher, "assistance")}></Grade>Hjelpsomhet</p></div>
                                         </div>
                                     </Link>
                                 ))
