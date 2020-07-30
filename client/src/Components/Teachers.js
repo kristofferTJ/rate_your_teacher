@@ -191,7 +191,7 @@ class Teachers extends Component {
                                                 {teacher.courses.map(course => <p>{course.name}, </p>)}
                                 ved {teacher.university}</div>
                                             <p className="teacher_total_grade">Total karakter <br></br><br></br><Grade grade={this.totalAverage(teacher)}></Grade></p>
-                                            <div className="teacher_grades"><p>Kunnskap: <Grade grade={this.knowledgeAverage(teacher)}></Grade></p><p>Kommunikasjon: <Grade grade={this.communicationAverage(teacher)}></Grade></p><p>Hjelpsomhet: <Grade grade={this.assistanceAverage(teacher)}></Grade></p></div>
+                                            <div className="teacher_grades"><p> <Grade grade={this.knowledgeAverage(teacher)}></Grade>Kunnskap</p><p> <Grade grade={this.communicationAverage(teacher)}></Grade>Kommunikasjon</p><p> <Grade grade={this.assistanceAverage(teacher)}></Grade>Hjelpsomhet</p></div>
                                         </div>
                                     </Link>
                                 ))
