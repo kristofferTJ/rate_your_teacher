@@ -3,19 +3,11 @@ import Card from 'react-bootstrap/Card'
 import Grade from './Grade'
 
 
-class GradeCard extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            communicationGrade : 0,
-            knowlegdeGrade : 0,
-            assistanceGrade : 0
-        }
-    }
+function GradeCard({courses}) {
 
 
 
-    gradeAverage = (co, skill) => {
+    const gradeAverage = (co, skill) => {
         var grades = 0
         var gradeCount = 0
         var avg = 0
@@ -35,51 +27,47 @@ class GradeCard extends Component {
         }
     }
 
-    
-    render() {
-        return (
-            <Card className="GradeCard">
-                <h1>Karakterkort</h1>
-                <div className="totalGrade">
-                    <Grade grade={this.gradeAverage(this.props.courses, "total")} />
-                <h3>Total Karakter</h3> 
+    return (
+        <Card className="GradeCard">
+            <h1>Karakterkort</h1>
+            <div className="totalGrade">
+                <Grade grade={gradeAverage(courses, "total")} />
+            <h3>Total Karakter</h3> 
+            </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Communication</h3>
                 </div>
-
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Communication</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "knowledge")} />
-                        <h3>knowledge</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "assistance")} />
-                        <h3>Assistance</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Fagkunnskaper</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Fagkunnskaper</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Fagkunnskaper</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Fagkunnskaper</h3>
-                    </div>
-                    <div className="grades">
-                        <Grade grade={this.gradeAverage(this.props.courses, "communication")} />
-                        <h3>Fagkunnskaper</h3>
-                    </div>
-            </Card>
-        )
-    }
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "knowledge")} />
+                    <h3>knowledge</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "assistance")} />
+                    <h3>Assistance</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Fagkunnskaper</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Fagkunnskaper</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Fagkunnskaper</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Fagkunnskaper</h3>
+                </div>
+                <div className="grades">
+                    <Grade grade={gradeAverage(courses, "communication")} />
+                    <h3>Fagkunnskaper</h3>
+                </div>
+        </Card>
+    )
 }
 
 export default GradeCard;
