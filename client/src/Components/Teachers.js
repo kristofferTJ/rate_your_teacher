@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Grade from './Grade'
 
 
 class Teachers extends Component {
@@ -42,7 +43,19 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            return avg
+            if (avg >= 5) {
+                return "A"
+            } else if (avg >= 4) {
+                return "B"
+            } else if (avg >= 3) {
+                return "C"
+            } else if (avg >= 2) {
+                return "D"
+            } else if (avg >= 1) {
+                return "E"
+            } else {
+                return "F"
+            }
         }
         else {
             return "Ikke registrert"
@@ -61,7 +74,19 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            return avg
+            if (avg >= 5) {
+                return "A"
+            } else if (avg >= 4) {
+                return "B"
+            } else if (avg >= 3) {
+                return "C"
+            } else if (avg >= 2) {
+                return "D"
+            } else if (avg >= 1) {
+                return "E"
+            } else {
+                return "F"
+            }
         }
         else {
             return ""
@@ -79,7 +104,19 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            return avg
+            if (avg >= 5) {
+                return "A"
+            } else if (avg >= 4) {
+                return "B"
+            } else if (avg >= 3) {
+                return "C"
+            } else if (avg >= 2) {
+                return "D"
+            } else if (avg >= 1) {
+                return "E"
+            } else {
+                return "F"
+            }
         }
         else {
             return ""
@@ -97,7 +134,19 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            return avg
+            if (avg >= 5) {
+                return "A"
+            } else if (avg >= 4) {
+                return "B"
+            } else if (avg >= 3) {
+                return "C"
+            } else if (avg >= 2) {
+                return "D"
+            } else if (avg >= 1) {
+                return "E"
+            } else {
+                return "F"
+            }
         }
         else {
             return ""
@@ -141,8 +190,8 @@ class Teachers extends Component {
                                             <div className="teacher_info"><h1>{teacher.user.name}</h1>
                                                 {teacher.courses.map(course => <p>{course.name}, </p>)}
                                 ved {teacher.university}</div>
-                                            <p className="teacher_total_grade">Total karakter <br></br><br></br><p className="grade">{this.totalAverage(teacher)}</p></p>
-                                            <div className="teacher_grades"><p>Kunnskap: <p className="grade">{this.knowledgeAverage(teacher)}</p></p><p>Kommunikasjon: <p className="grade">{this.communicationAverage(teacher)}</p></p><p>Hjelpsomhet: <p className="grade">{this.assistanceAverage(teacher)}</p></p></div>
+                                            <p className="teacher_total_grade">Total karakter <br></br><br></br><Grade grade={this.totalAverage(teacher)}></Grade></p>
+                                            <div className="teacher_grades"><p>Kunnskap: <Grade grade={this.knowledgeAverage(teacher)}></Grade></p><p>Kommunikasjon: <Grade grade={this.communicationAverage(teacher)}></Grade></p><p>Hjelpsomhet: <Grade grade={this.assistanceAverage(teacher)}></Grade></p></div>
                                         </div>
                                     </Link>
                                 ))

@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React from 'react'
+
 
 function Grade(props) {
     let letter
@@ -6,7 +7,6 @@ function Grade(props) {
         background : ""
     }
 
-    console.log(props.grade)
     if (props.grade > 5.00 ) {
         styles.background = "#00E640"
         letter = "A"
@@ -29,11 +29,12 @@ function Grade(props) {
         styles.background = "#FF0F00"
         letter = "NA"
     }
-        return (
-                <span style={styles}>
-                    <h2>{letter}</h2>
-                </span>
-        )
-    }
+  
+    return (
+            <span style={styles}>
+                <h2>{letter}</h2>
+            </span>
+    )
+}
 
 export default Grade;

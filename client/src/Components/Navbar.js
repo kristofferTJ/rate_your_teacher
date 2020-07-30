@@ -8,7 +8,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     return (
         <div className="navbar">
             <Link className="navbarLink" to="/"><p><img alt="logo"></img></p></Link>
-            <p>Om oss</p>
+            <Link className="navbarLink" to="/OmOss"><p>Om oss</p></Link>
             <p>Kontakt</p>
             {!loading &&
                 (<Fragment>{isAuthenticated ?
