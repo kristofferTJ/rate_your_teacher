@@ -43,19 +43,8 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
+
+            return avg
         }
         else {
             return "Ikke registrert"
@@ -74,19 +63,7 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
+            return avg
         }
         else {
             return ""
@@ -104,19 +81,7 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
+            return avg
         }
         else {
             return ""
@@ -134,19 +99,7 @@ class Teachers extends Component {
         avg = grades / gradeCount
 
         if (avg) {
-            if (avg >= 5) {
-                return "A"
-            } else if (avg >= 4) {
-                return "B"
-            } else if (avg >= 3) {
-                return "C"
-            } else if (avg >= 2) {
-                return "D"
-            } else if (avg >= 1) {
-                return "E"
-            } else {
-                return "F"
-            }
+            return avg
         }
         else {
             return ""
