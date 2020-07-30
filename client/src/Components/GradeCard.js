@@ -36,15 +36,15 @@ function GradeCard({courses}) {
             </div>
                 <div className="grades">
                     <Grade grade={gradeAverage(courses, "communication")} />
-                    <h3>Communication</h3>
+                    <h3>Kommunikasjon</h3>
                 </div>
                 <div className="grades">
                     <Grade grade={gradeAverage(courses, "knowledge")} />
-                    <h3>knowledge</h3>
+                    <h3>Kunnskap</h3>
                 </div>
                 <div className="grades">
                     <Grade grade={gradeAverage(courses, "assistance")} />
-                    <h3>Assistance</h3>
+                    <h3>Hjelpsomhet</h3>
                 </div>
                 <div className="grades">
                     <Grade grade={gradeAverage(courses, "communication")} />
