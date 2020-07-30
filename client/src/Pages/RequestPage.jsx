@@ -64,7 +64,15 @@ class RequestPage extends Component {
                 <Navbar />
                 <h1>Forespørsler</h1>
                 <div className="requests">
-                    {this.state.requests.map(req => (<div className="request"><p>{req.name} {req.university} {req.course}</p><button onClick={() => this.handleDelete(req)}>Delete</button></div>))}
+                    <table>
+                        <tr>
+                            <th>Navn</th>
+                            <th>Universitet</th>
+                            <th>Fag</th>
+                            <th></th>
+                        </tr>
+                        {this.state.requests.map(req => (<tr className="request"><td>{req.name}</td> <td>{req.university}</td> <td>{req.course}</td><td><button onClick={() => this.handleDelete(req)}>Delete</button></td></tr>))}
+                    </table>
                 </div>
             </div>
         );

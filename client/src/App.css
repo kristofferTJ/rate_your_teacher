@@ -548,21 +548,25 @@ div[class="dropdown-menu show"]{
   outline: none;
 }
 
+.requests table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.requests table {
+  margin:auto;
+}
+
 .request{
   font-size: 22px;
   
 }
 
-
-.request p{
-  display: inline;
-  margin: 20px;
-}
-
 .request button{
   display: inline;
-  margin:auto;
-  margin-bottom: 30px;
+  margin:10px;
+  align-self: center;
   height: 30px;
   background-color: #2C98F0;
   width: 120px;
