@@ -135,7 +135,7 @@ class Teachers extends Component {
                                         return teacher
                                     }
                                 }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
-                                    <Link className="link" to="/teacherPage">
+                                    <Link className="link" to={`/teacherPage/${teacher._id}`}>
                                         <div className="teacher" key={teacher}>
                                             <img alt="avatar" src={teacher.user.avatar}></img>
                                             <div className="teacher_info"><h1>{teacher.user.name}</h1>

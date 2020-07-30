@@ -44,6 +44,7 @@
 .teacherInformation{
   grid-row: 1 / 2;
   grid-column: 3 / 5;
+  margin: auto;
 }
 
 
@@ -58,7 +59,7 @@
   margin: 35px 55px;
   cursor: pointer;
   height: 71px;
-  width: 160px;
+  width: 180px;
 
   grid-row: 1 / 2;
   grid-column: 7 / 9;
@@ -96,7 +97,6 @@
 
 .GradeCard > div {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 

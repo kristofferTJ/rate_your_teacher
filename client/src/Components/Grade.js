@@ -1,29 +1,39 @@
-import React, {useState, useEffect} from 'react'
+import React, {Component} from 'react'
 
-function Grade({ grade }) {
-    const [backgroundColor, setColor] = useState("#00E540");
+function Grade(props) {
+    let letter
+    const styles = {
+        background : ""
+    }
 
-    useEffect(() => {
-        if (grade === "A") {
-            setColor(() => "#00E640")
-        } else if (grade === "B") {
-            setColor(() => "#90E35D")
-        } else if (grade === "C") {
-            setColor(() => "#CEE92A")
-        } else if (grade === "D") {
-            setColor(() => "#FFC01E")
-        } else if (grade === "E") {
-            setColor(() => "#FF6745")
-        } else if (grade === "F") {
-            setColor(() => "#F82D00")
-        }
-    },[])
-    
-    return (
-            <span style={{backgroundColor}}>
-                <h2>{grade}</h2>
-            </span>
-    )
-}
+    console.log(props.grade)
+    if (props.grade > 5.00 ) {
+        styles.background = "#00E640"
+        letter = "A"
+    } else if ( 4 < props.grade && props.grade <= 5 ) {
+        styles.background = "#90E35D"
+        letter = "B"
+    } else if (3 < props.grade && props.grade<= 4 ) {
+        styles.background = "#CEE92A"
+        letter = "C"
+    } else if (2 < props.grade && props.grade <= 3 ) {
+        styles.background = "#FFC01E"
+        letter = "D"
+    } else if (1 < props.grade && props.grade <= 2 ) {
+        styles.background = "#FF7E36"
+        letter = "E"
+    } else if (0 < props.grade && props.grade <= 1 ) {
+        styles.background = "#F82D00"
+        letter = "F"
+    } else {
+        styles.background = "#FF0F00"
+        letter = "NA"
+    }
+        return (
+                <span style={styles}>
+                    <h2>{letter}</h2>
+                </span>
+        )
+    }
 
 export default Grade;
