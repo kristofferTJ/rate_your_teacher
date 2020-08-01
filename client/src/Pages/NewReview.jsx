@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 
 
-class OmOss extends Component {
+class NewReview extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,4 +23,4 @@ class OmOss extends Component {
     }
 }
 
-export default OmOss
+export default NewReview;

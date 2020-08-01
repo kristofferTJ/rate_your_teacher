@@ -3,6 +3,8 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 import GradeCard from "../Components/GradeCard"
 import Ratings from "../Components/Ratings"
+import { Link } from "react-router-dom";
+
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -23,13 +25,13 @@ class TeacherPage extends Component {
         fetch("http://localhost:8000/api/teacherprofile/profile/" + this.state.id)
             .then(res => res.json())
             .then(res => {
-                this.setState({ 
+                this.setState({
                     teacher: res,
-                    courses: res.courses, 
+                    courses: res.courses,
                     user: res.user,
-                    isLoading: false 
+                    isLoading: false
+                })
             })
-        })
 
     }
 
@@ -49,7 +51,7 @@ class TeacherPage extends Component {
     }
 
     render() {
-        const {teacher, user, courses} = this.state
+        const { teacher, user, courses } = this.state
 
         return (
             <div className="App">
@@ -57,10 +59,10 @@ class TeacherPage extends Component {
                 <div className="teacherPage" >
                     <img alt="avatar" src={user.avatar}></img>
                     <div className="teacherInformation">
-                    <h2 >{user.name}</h2>
-                    <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
+                        <h2 >{user.name}</h2>
+                        <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
                     </div>
-                    <button className="giVurdering">Gi vurdering</button>
+                    <Link className="giVurderingLink" to={`/NewReview/${this.state.teacher._id}`}><button className="giVurdering">Gi vurdering</button></Link>
                     <div className="menu">
                         <h3 className="item1">Karakterkort</h3>
                         <h3 className="item2">Annen undervisning</h3>
