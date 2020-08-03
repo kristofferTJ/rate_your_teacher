@@ -53,7 +53,6 @@ class TeacherPage extends Component {
     render() {
         const { teacher, user, courses } = this.state
 
-
         return (
             <div className="App">
                 <Navbar />
