@@ -87,8 +87,9 @@ class NewReview extends Component {
             const res = await axios.put('http://localhost:8000/api/studentprofile/' + this.state.teacher._id + '/' + this.state.course.id, body, config)
             //this.showValidationError('email', "User registered")
             console.log("utpå")
-            console.log(res.data)
-            //this.props.history.push('/SentRequest')
+            //console.log(res.data)
+            console.log("skjdfdsjhf")
+            this.props.history.push('/SentReview')
 
         } catch (err) {
             /*if (err.response.data.errors[0].msg === "User already exists ") {
