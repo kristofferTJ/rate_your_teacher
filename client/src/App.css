@@ -613,8 +613,51 @@ div[class="dropdown-menu show"]{
   outline: none;
 }
 
+.newReview{
+  font-size: 20px;
+}
+
 #dropdownNewReview{
-  background-color: blue;
+  font-size: 20px;
+  height: 33px;
+  background-color: white;
+  color: black;
+  border: black 1px solid;
+  padding: 5px;
+  /*width: 65px;*/
+  padding-right: 20px;
+  text-align: left;
+  background-image: url("arrow-black.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#dropdownNewReview:focus{
+  outline:none;
+}
+
+.dropdownItemReview{
+  background-color: white;
+  color: black;
+  display: block;
+  font-size: 18px;
+  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.dropdownItemReview:hover{
+  background-color: rgb(207, 204, 204);
+}
+
+.newReview div[class="dropdown-menu show"]{
+  max-height: 200px;
+  overflow: scroll;
+  border-radius: 0px;
 }
 
 @keyframes App-logo-spin {

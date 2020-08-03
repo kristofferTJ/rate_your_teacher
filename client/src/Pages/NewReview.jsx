@@ -4,6 +4,7 @@ import '../App.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import axios from 'axios'
+import ReactStars from 'react-rating-stars-component'
 
 
 
@@ -14,7 +15,10 @@ class NewReview extends Component {
             id: this.props.match.params.userId,
             teacher: '',
             courses: [],
-            course: '',
+            course: {
+                id: '',
+                code: ''
+            },
             user: '',
             assistance: '',
             communication: '',
@@ -22,26 +26,30 @@ class NewReview extends Component {
             isLoading: false
         }
         this.setCourse = this.setCourse.bind(this)
-        this.handleChangeAssistance = this.handleChangeAssistance.bind(this)
-        this.handleChangeCommunication = this.handleChangeCommunication.bind(this)
-        this.handleChangeKnowledge = this.handleChangeKnowledge.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.ratingChangedKnowledge = this.ratingChangedKnowledge.bind(this)
+        this.ratingChangedAssistance = this.ratingChangedAssistance.bind(this)
+        this.ratingChangedCommunication = this.ratingChangedCommunication.bind(this)
     }
 
     setCourse = (course) => {
-        this.setState({ course: course })
+        this.setState({
+            course: {
+                id: course._id,
+                code: course.coursecode
+            }
+        })
     }
 
-    handleChangeAssistance(event) {
-        this.setState({ assistance: event.target.value })
+    ratingChangedAssistance(newRating) {
+        this.setState({ assistance: newRating })
     }
-    handleChangeCommunication(event) {
-        this.setState({ communication: event.target.value })
+    ratingChangedCommunication(newRating) {
+        this.setState({ communication: newRating })
     }
-    handleChangeKnowledge(event) {
-        this.setState({ knowledge: event.target.value })
+    ratingChangedKnowledge(newRating) {
+        this.setState({ knowledge: newRating })
     }
-
 
 
     componentDidMount = async () => {
@@ -76,7 +84,7 @@ class NewReview extends Component {
             console.log("body" + body)
 
             console.log("absolutt")
-            const res = await axios.put('http://localhost:8000/api/studentprofile/' + this.state.teacher._id + '/' + this.state.course, body, config)
+            const res = await axios.put('http://localhost:8000/api/studentprofile/' + this.state.teacher._id + '/' + this.state.course.id, body, config)
             //this.showValidationError('email', "User registered")
             console.log("utpå")
             console.log(res.data)
@@ -93,10 +101,10 @@ class NewReview extends Component {
     render() {
 
         const setTextCourse = () => {
-            if (this.state.course === "") {
+            if (this.state.course.id === "") {
                 textCourse = "Fag"
             } else {
-                textCourse = this.state.course
+                textCourse = this.state.course.code
             }
         }
         var textCourse = ""
@@ -113,20 +121,17 @@ class NewReview extends Component {
                     <label for="inputCourse">Fag
                     <DropdownButton className="dropdown" id="dropdownNewReview" title={textCourse}>
 
-                            {this.state.courses.map(course => (<Dropdown.Item className="dropdownItem" onClick={this.setCourse.bind(this, course._id)}>{course.coursecode} {course.name}</Dropdown.Item>))}
+                            {this.state.courses.map(course => (<Dropdown.Item className="dropdownItemReview" onClick={this.setCourse.bind(this, course)}>{course.coursecode} {course.name}</Dropdown.Item>))}
                         </DropdownButton> </label>
                     <br></br>
                     <label for="inputKnowledge">Kunnskap
-                    <input required id="inputKnowledge" onChange={this.handleChangeKnowledge} type="number" max="5" min="0">
-                        </input></label>
+                    <ReactStars count={6} onChange={this.ratingChangedKnowledge} size={24} activeColor="#219653" /></label>
                     <br></br>
                     <label for="inputCommunication">Kommunikasjon
-                    <input required id="inputCommunication" onChange={this.handleChangeCommunication} type="number" max="5" min="0">
-                        </input></label>
+                    <ReactStars count={6} onChange={this.ratingChangedCommunication} size={24} activeColor="#219653" /></label>
                     <br></br>
                     <label for="inputAssistance">Hjelpsomhet
-                    <input required id="inputAssistance" onChange={this.handleChangeAssistance} type="number" max="5" min="0">
-                        </input></label>
+                    <ReactStars count={6} onChange={this.ratingChangedAssistance} size={24} activeColor="#219653" /></label>
                     <br></br>
                     <input className="submitTeacher" type="submit" value="Send inn"></input>
                 </form>
