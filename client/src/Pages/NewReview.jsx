@@ -119,20 +119,21 @@ class NewReview extends Component {
                 <Navbar />
                 <h1>Ny vurdering av {this.state.teacher.user?.name}</h1>
                 <form className="newReview" onSubmit={this.handleSubmit}>
-                    <label for="inputCourse">Fag
-                    <DropdownButton className="dropdown" id="dropdownNewReview" title={textCourse}>
+                    <h2>Velg gjeldende fag</h2>
+                    <DropdownButton className="dropdown" required id="dropdownNewReview" title={textCourse}>
 
-                            {this.state.courses.map(course => (<Dropdown.Item className="dropdownItemReview" onClick={this.setCourse.bind(this, course)}>{course.coursecode} {course.name}</Dropdown.Item>))}
-                        </DropdownButton> </label>
+                        {this.state.courses.map(course => (<Dropdown.Item className="dropdownItemReview" onClick={this.setCourse.bind(this, course)}>{course.coursecode} {course.name}</Dropdown.Item>))}
+                    </DropdownButton>
                     <br></br>
+                    <h2>Gi din vurdering av foreleseren </h2>
                     <label for="inputKnowledge">Kunnskap
-                    <ReactStars count={6} onChange={this.ratingChangedKnowledge} size={24} activeColor="#219653" /></label>
+                    <ReactStars count={6} onChange={this.ratingChangedKnowledge} size={24} activeColor="#1aa054" className="reactStar" /></label>
                     <br></br>
                     <label for="inputCommunication">Kommunikasjon
-                    <ReactStars count={6} onChange={this.ratingChangedCommunication} size={24} activeColor="#219653" /></label>
+                    <ReactStars count={6} onChange={this.ratingChangedCommunication} size={24} activeColor="#1aa054" className="reactStar" /></label>
                     <br></br>
                     <label for="inputAssistance">Hjelpsomhet
-                    <ReactStars count={6} onChange={this.ratingChangedAssistance} size={24} activeColor="#219653" /></label>
+                    <ReactStars count={6} onChange={this.ratingChangedAssistance} size={24} activeColor="#1aa054" className="reactStar" /></label>
                     <br></br>
                     <input className="submitTeacher" type="submit" value="Send inn"></input>
                 </form>
