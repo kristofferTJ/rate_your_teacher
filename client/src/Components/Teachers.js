@@ -39,12 +39,20 @@ class Teachers extends Component {
         var avg = 0
 
         if (skill === "total") {
-            { teacher.courses.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+            { teacher.courses.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance))) }
+            { teacher.courses.map(course => course.ratings.map(rating => gradeCount += 3)) }
         } else {
-            { teacher.courses.map(course => course.ratings.map(rating => grades += rating[skill], gradeCount += 1)) }
+            { teacher.courses.map(course => course.ratings.map(rating => grades += rating[skill])) }
+            { teacher.courses.map(course => course.ratings.map(rating => gradeCount += 1)) }
         }
 
+        console.log(skill)
+        console.log(grades)
+        console.log(gradeCount)
+
         avg = grades / gradeCount
+
+        console.log(avg)
 
         if (avg) {
 
@@ -57,12 +65,13 @@ class Teachers extends Component {
 
 
     render() {
-
+        console.log(this.state.teachers)
 
         return (
 
 
-            <div>
+
+            < div >
                 {
                     (this.state.teachers.filter((teacher) => {
                         if (teacher.courses.filter((course) => {

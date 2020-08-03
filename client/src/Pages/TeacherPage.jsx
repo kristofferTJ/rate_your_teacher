@@ -23,13 +23,13 @@ class TeacherPage extends Component {
         fetch("http://localhost:8000/api/teacherprofile/profile/" + this.state.id)
             .then(res => res.json())
             .then(res => {
-                this.setState({ 
+                this.setState({
                     teacher: res,
-                    courses: res.courses, 
+                    courses: res.courses,
                     user: res.user,
-                    isLoading: false 
+                    isLoading: false
+                })
             })
-        })
 
     }
 
@@ -49,7 +49,7 @@ class TeacherPage extends Component {
     }
 
     render() {
-        const {teacher, user, courses} = this.state
+        const { teacher, user, courses } = this.state
 
         return (
             <div className="App">
@@ -57,8 +57,8 @@ class TeacherPage extends Component {
                 <div className="teacherPage" >
                     <img alt="avatar" src={user.avatar}></img>
                     <div className="teacherInformation">
-                    <h2 >{user.name}</h2>
-                    <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
+                        <h2 >{user.name}</h2>
+                        <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
                     </div>
                     <button className="giVurdering">Gi vurdering</button>
                     <div className="menu">
