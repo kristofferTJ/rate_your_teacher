@@ -3,6 +3,8 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 import GradeCard from "../Components/GradeCard"
 import Ratings from "../Components/Ratings"
+import { Link } from "react-router-dom";
+
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -60,7 +62,8 @@ class TeacherPage extends Component {
                         <h2 >{user.name}</h2>
                         <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
                     </div>
-                    <button className="giVurdering">Gi vurdering</button>
+                    {courses.length > 0 ? <Link className="giVurderingLink" to={`/NewReview/${this.state.teacher._id}`}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
+
                     <div className="menu">
                         <h3 className="item1">Karakterkort</h3>
                         <h3 className="item2">Annen undervisning</h3>
@@ -73,4 +76,6 @@ class TeacherPage extends Component {
         )
     }
 }
+
+
 export default TeacherPage;

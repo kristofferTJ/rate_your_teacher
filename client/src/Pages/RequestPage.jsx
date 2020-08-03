@@ -29,11 +29,7 @@ class RequestPage extends Component {
 
     async handleDelete(req) {
         try {
-            const config = {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }
+
 
             const id = req._id;
             console.log(id);

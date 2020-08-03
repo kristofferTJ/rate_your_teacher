@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 
 
-class SentRequest extends Component {
+class SentReview extends Component {
     constructor(props) {
         super(props)
 
@@ -16,11 +16,10 @@ class SentRequest extends Component {
 
             <div className="App">
                 <Navbar />
-                <h1>Ny foreleser</h1>
-                <h2>Takk for din forespørsel!</h2>
+                <h1>Takk for din vurdering!</h1>
             </div>
         );
     }
 }
 
-export default SentRequest;
+export default SentReview;
