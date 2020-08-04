@@ -48,6 +48,21 @@ const TeacherProfileSchema = new mongoose.Schema({
           assistance: {
             type: Number,
           },
+          assignments: {
+            type: Number,
+          },
+          book: {
+            type: Number,
+          },
+          passion: {
+            type: Number,
+          },
+          looks: {
+            type: Number,
+          },
+          language: {
+            type: Number,
+          },
         },
       ],
     },

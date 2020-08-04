@@ -85,42 +85,39 @@ router.post('/', auth, [
 
 router.get('/', async (req, res) => {
   try {
-    var profiles = await TeacherProfile.find()
-      // .populate({
-      //   path: 'courses.course',
-      //   select: ['coursecode'],
-      //   model: 'course',
-      // })
-      .populate('user', ['name', 'avatar']);
+    var profiles = await TeacherProfile.find().populate('user', [
+      'name',
+      'avatar',
+    ]);
 
-    const teachers = [];
-    let profile = [];
-    let course = [];
-    let cor = {};
+    // const teachers = [];
+    // let profile = [];
+    // let course = [];
+    // let cor = {};
 
-    for (let i = 0; i < profiles.length; i++) {
-      arr = [];
-      profile = profiles[i];
-      for (let j = 0; j < profile.courses.length; j++) {
-        course = profile.courses[j];
-        //console.log(course);
-        cor = await Course.findById(course._id);
-        if (cor) {
-          let populated = {
-            course: cor._id,
-            name: cor.name,
-            semester: cor.semester,
-            coursecode: cor.coursecode,
-          };
-          arr.push(populated);
-          //console.log(arr);
-        }
-      }
-      profile[arr] = arr;
-      teachers.push(profile);
-      console.log(profile[arr]);
-    }
-    console.log(teachers);
+    // for (let i = 0; i < profiles.length; i++) {
+    //   arr = [];
+    //   profile = profiles[i];
+    //   for (let j = 0; j < profile.courses.length; j++) {
+    //     course = profile.courses[j];
+    //     //console.log(course);
+    //     cor = await Course.findById(course._id);
+    //     if (cor) {
+    //       let populated = {
+    //         course: cor._id,
+    //         name: cor.name,
+    //         semester: cor.semester,
+    //         coursecode: cor.coursecode,
+    //       };
+    //       arr.push(populated);
+    //       //console.log(arr);
+    //     }
+    //   }
+    //   profile[arr] = arr;
+    //   teachers.push(profile);
+    //   console.log(profile[arr]);
+    // }
+    // console.log(teachers);
 
     // profiles.forEach((profile) => {
     //   var coursearray = [];
