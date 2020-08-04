@@ -20,6 +20,9 @@ import OmOss from './Pages/OmOss';
 import SentRequest from './Pages/SentRequest';
 import NewReview from './Pages/NewReview';
 import SentReview from './Pages/SentReview';
+import Contact from './Pages/Contact';
+import RecievedContact from './Pages/RecievedContact';
+import SentContact from './Pages/SentContact';
 
 //Redux
 import { Provider } from 'react-redux'
@@ -50,6 +53,9 @@ const App = () => {
           <Route exact path='/SentRequest' component={SentRequest} />
           <Route exact path='/NewReview/:userId' component={NewReview} />
           <Route exact path='/SentReview' component={SentReview} />
+          <Route exact path='/Contact' component={Contact} />
+          <Route exact path='/RecievedContact' component={RecievedContact} />
+          <Route exact path='/SentContact' component={SentContact} />
           <Redirect to='/404' />
         </Switch>
       </Router>

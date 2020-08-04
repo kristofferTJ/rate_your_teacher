@@ -9,7 +9,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <div className="navbar">
             <Link className="navbarLink" to="/"><p><img alt="logo"></img></p></Link>
             <Link className="navbarLink" to="/OmOss"><p>Om oss</p></Link>
-            <p>Kontakt</p>
+            <Link className="navbarLink" to="/Contact"><p>Kontakt</p></Link>
             {!loading &&
                 (<Fragment>{isAuthenticated ?
                     <a onClick={logout} className="navbarLink" href='#!'>Logg Ut</a> :

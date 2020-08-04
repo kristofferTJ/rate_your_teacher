@@ -683,6 +683,9 @@ div[class="undefined react-stars"]:focus{
   outline: none
 }
 
+#inputText{
+  height: 120px;
+}
 
 
 @keyframes App-logo-spin {
