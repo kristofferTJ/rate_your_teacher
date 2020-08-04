@@ -61,8 +61,8 @@ class Contact extends Component {
         return (
             <div className="App">
                 <Navbar />
-                <h1>Ny foreleser</h1>
-                <h2>Skriv inn informasjon om foreleseren så skal vi vurdere forespørselen</h2>
+                <h1>Kontakt oss</h1>
+                <h2>Skriv navnet ditt, mailen din og hva det gjelder så tar vi kontakt med deg</h2>
                 <form className="newTeacher" onSubmit={this.handleSubmit}>
                     <label for="inputName">Navn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input id="inputName" type="text" onChange={this.handleChangeName} required></input></label>
