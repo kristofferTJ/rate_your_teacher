@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 
 
-class RequestPage extends Component {
+class OmOss extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,4 +23,4 @@ class RequestPage extends Component {
     }
 }
 
-export default RequestPage;
+export default OmOss

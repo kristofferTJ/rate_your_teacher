@@ -3,7 +3,9 @@ import Navbar from "../Components/Navbar";
 import '../App.css';
 import GradeCard from "../Components/GradeCard"
 import Ratings from "../Components/Ratings"
+import { Link } from "react-router-dom";
 import Sidebar from "../Components/Sidebar"
+
 
 class TeacherPage extends Component {
     constructor(props) {
@@ -24,13 +26,13 @@ class TeacherPage extends Component {
         fetch("http://localhost:8000/api/teacherprofile/profile/" + this.state.id)
             .then(res => res.json())
             .then(res => {
-                this.setState({ 
+                this.setState({
                     teacher: res,
-                    courses: res.courses, 
+                    courses: res.courses,
                     user: res.user,
-                    isLoading: false 
+                    isLoading: false
+                })
             })
-        })
 
     }
 
@@ -70,7 +72,7 @@ class TeacherPage extends Component {
     }
 
     render() {
-        const {teacher, user, courses} = this.state
+        const { teacher, user, courses } = this.state
 
         return (
             <div className="App">
@@ -82,7 +84,7 @@ class TeacherPage extends Component {
                                 <h2 >{user.name}</h2>
                                 <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
                             </div>
-                            <button className="giVurdering">Gi vurdering</button>
+                            {courses.length > 0 ? <Link className="giVurderingLink" to={`/NewReview/${this.state.teacher._id}`}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
                         </div>
                         <div className="content">
                             <GradeCard courses={courses} id="section1" />
@@ -98,4 +100,6 @@ class TeacherPage extends Component {
         )
     }
 }
+
+
 export default TeacherPage;

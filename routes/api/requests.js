@@ -12,10 +12,10 @@ const Requests = require('../../models/Requests');
 
 
 // @route   POST api/teacherprofile
-// @desc    Create or update teacher profile
+// @desc    Create request
 // @access  Private
 
-router.post('/', [
+router.post('/', auth, [
     [check('name', 'Name is required').not().isEmpty()],
     [check('uni', 'University is required').not().isEmpty()],
     async (req, res) => {
@@ -58,7 +58,7 @@ router.post('/', [
 ]);
 
 // @route   GET api/teacherprofile
-// @desc    Get all teacher profiles
+// @desc    Get all requests
 // @access  Public
 
 router.get('/', async (req, res) => {
@@ -74,7 +74,7 @@ router.get('/', async (req, res) => {
 
 
 // @route   DELETE api/teacherprofile
-// @desc    Delete teacher profile & user
+// @desc    Delete request
 // @access  Private
 
 router.delete('/:_id', async (req, res) => {

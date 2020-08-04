@@ -86,6 +86,8 @@ router.delete('/', auth, async (req, res) => {
 });
 
 router.put('/:teacher_id/:course_id', auth, async (req, res) => {
+
+  console.log("inni her")
   const { communication, knowledge, assistance } = req.body;
 
   const newRating = {
@@ -94,6 +96,7 @@ router.put('/:teacher_id/:course_id', auth, async (req, res) => {
     knowledge,
     assistance,
   };
+
 
   try {
     const teacher = await TeacherProfile.findById(req.params.teacher_id);

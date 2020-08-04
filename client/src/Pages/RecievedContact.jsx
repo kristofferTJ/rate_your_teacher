@@ -5,11 +5,11 @@ import axios from 'axios'
 
 
 
-class RequestPage extends Component {
+class RecievedContact extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            requests: [],
+            contacts: [],
             isLoading: false
         }
         this.handleDelete = this.handleDelete.bind(this);
@@ -19,9 +19,9 @@ class RequestPage extends Component {
 
         this.setState({ isLoading: true })
 
-        fetch("http://localhost:8000/api/requests/")
+        fetch("http://localhost:8000/api/contact/")
             .then(res => res.text())
-            .then(res => this.setState({ requests: JSON.parse(res) }))
+            .then(res => this.setState({ contacts: JSON.parse(res) }))
             .then(this.setState({ isLoading: false }))
 
 
@@ -34,7 +34,7 @@ class RequestPage extends Component {
             const id = req._id;
             console.log(id);
 
-            await axios.delete('http://localhost:8000/api/requests/' + id);
+            await axios.delete('http://localhost:8000/api/contact/' + id);
             //this.showValidationError('email', "User registered")
             console.log("her")
 
@@ -52,13 +52,12 @@ class RequestPage extends Component {
 
 
     render() {
-        console.log(this.state.requests)
 
         return (
 
             <div className="App">
                 <Navbar />
-                <h1>Forespørsler</h1>
+                <h1>Kontakt</h1>
                 <div className="requests">
                     <table>
                         <tr>
@@ -67,7 +66,7 @@ class RequestPage extends Component {
                             <th>Fag</th>
                             <th></th>
                         </tr>
-                        {this.state.requests.map(req => (<tr className="request"><td>{req.name}</td> <td>{req.university}</td> <td>{req.course}</td><td><button onClick={() => this.handleDelete(req)}>Delete</button></td></tr>))}
+                        {this.state.contacts.map(contact => (<tr className="request"><td>{contact.name}</td> <td>{contact.email}</td> <td>{contact.text}</td><td><a href={"mailto:" + contact.email}><button>Send mail</button></a><button onClick={() => this.handleDelete(contact)}>Delete</button></td></tr>))}
                     </table>
                 </div>
             </div>
@@ -75,4 +74,4 @@ class RequestPage extends Component {
     }
 }
 
-export default RequestPage;
+export default RecievedContact;
