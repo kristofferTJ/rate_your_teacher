@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Grade from './Grade'
 
 
-function GradeCard({courses}) {
+function GradeCard({courses, id}) {
 
 
 
@@ -18,7 +18,7 @@ function GradeCard({courses}) {
             } else {
                 co.forEach((course) => course.ratings.forEach((rating) => grades += rating[skill], gradeCount += 1)) 
             }
-        
+
             avg = grades / gradeCount
 
             return avg
@@ -28,7 +28,7 @@ function GradeCard({courses}) {
     }
 
     return (
-        <Card className="GradeCard">
+        <Card className="GradeCard" id={id} >
             <h1>Karakterkort</h1>
             <div className="totalGrade">
                 <Grade grade={gradeAverage(courses, "total")} />
