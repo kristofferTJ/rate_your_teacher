@@ -91,7 +91,7 @@ class Teachers extends Component {
                                         if (course.coursecode === this.state.course || this.state.course === "") {
                                             return course
                                         }
-                                    }).length > 0 || teacher.courses.length == 0) {
+                                    }).length > 0 || (teacher.courses.length == 0 && this.state.course === "")) {
                                         return teacher
                                     }
                                 }).filter(teacher => teacher.university.toLowerCase().includes(this.state.uni.toLowerCase())).filter(teacher => teacher.user.name.toLowerCase().includes(this.state.search.toLowerCase())).map(teacher => (
