@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const config = require('config');
+//const axios = require('axios');
+//const config = require('config');
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator');
+//const { check, validationResult } = require('express-validator');
 
 const TeacherProfile = require('../../models/TeacherProfile');
 const StudentProfile = require('../../models/StudentProfile');
@@ -85,18 +85,33 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
-router.put('/:teacher_id/:course_id', auth, async (req, res) => {
+// @route   DELETE api/studentprofile/:teacher_id/:course_id
+// @desc    Rate teacher to given course
+// @access  Private
 
-  console.log("inni her")
-  const { communication, knowledge, assistance } = req.body;
+router.put('/:teacher_id/:course_id', auth, async (req, res) => {
+  const {
+    communication,
+    knowledge,
+    assistance,
+    assignment,
+    book,
+    passion,
+    looks,
+    language,
+  } = req.body;
 
   const newRating = {
     user: req.user.id,
     communication,
     knowledge,
     assistance,
+    assignment,
+    book,
+    passion,
+    looks,
+    language,
   };
-
 
   try {
     const teacher = await TeacherProfile.findById(req.params.teacher_id);
@@ -118,17 +133,14 @@ router.put('/:teacher_id/:course_id', auth, async (req, res) => {
       var ratings = course.ratings;
 
       if (ratings.some((rate) => rate.user == req.user.id)) {
-        console.log('nope');
         ratings = ratings.filter((obj) => {
           obj.user.toString() !== req.user.id;
         });
       }
       ratings.unshift(newRating);
-
       teacher.ratings = ratings;
 
       await teacher.save();
-
       return res.json(ratings);
     }
     res.status(404).json({ msg: 'Could not find teacher' });
