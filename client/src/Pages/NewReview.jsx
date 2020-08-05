@@ -20,9 +20,13 @@ class NewReview extends Component {
                 code: ''
             },
             user: '',
-            assistance: '',
             communication: '',
             knowledge: '',
+            assistance: '',
+            assignment: '',
+            book: '',
+            passion: '',
+            language: '',
             isLoading: false
         }
         this.setCourse = this.setCourse.bind(this)
