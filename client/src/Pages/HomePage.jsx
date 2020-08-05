@@ -5,6 +5,9 @@ import '../App.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../actions/auth'
 
 class HomePage extends Component {
   constructor(props) {
@@ -17,8 +20,8 @@ class HomePage extends Component {
       isLoading: false
     }
     this.updateSearch = this.updateSearch.bind(this)
-  }
 
+  }
 
   updateSearch = (e) => {
     const newSearch = document.getElementById("input").value
@@ -44,6 +47,8 @@ class HomePage extends Component {
   }
 
   render() {
+
+
 
     const setTextUni = () => {
       if (this.state.uni === "") {
@@ -92,6 +97,7 @@ class HomePage extends Component {
     );
   }
 }
+
 
 export default HomePage;
 

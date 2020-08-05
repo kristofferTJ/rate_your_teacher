@@ -748,6 +748,7 @@ div[class="dropdown-menu show"]{
   max-height: 200px;
   overflow: scroll;
   border-radius: 0px;
+  border: 1px #9b9b9b solid;
 }
 
 .newReview .submitTeacher{
