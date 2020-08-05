@@ -4,13 +4,16 @@ import '../App.css';
 import GradeCard from "../Components/GradeCard"
 import Ratings from "../Components/Ratings"
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 class TeacherPage extends Component {
     constructor(props) {
+
         super(props)
         this.state = {
-            id: this.props.match.params.userId,
+            id: this.props.location.state.id,
             teacher: '',
             courses: [],
             user: '',
@@ -21,6 +24,7 @@ class TeacherPage extends Component {
     componentDidMount = async () => {
 
         this.setState({ isLoading: true })
+        console.log(this.state.id)
 
         fetch("http://localhost:8000/api/teacherprofile/profile/" + this.state.id)
             .then(res => res.json())
@@ -62,7 +66,7 @@ class TeacherPage extends Component {
                         <h2 >{user.name}</h2>
                         <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
                     </div>
-                    {courses.length > 0 ? <Link className="giVurderingLink" to={`/NewReview/${this.state.teacher._id}`}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
+                    {courses.length > 0 ? <Link className="giVurderingLink" to={{ pathname: '/NewReview', state: { id: this.state.teacher._id } }}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
 
                     <div className="menu">
                         <h3 className="item1">Karakterkort</h3>
@@ -77,5 +81,12 @@ class TeacherPage extends Component {
     }
 }
 
+Navbar.propTypes = {
+    auth: PropTypes.object.isRequired
+}
 
-export default TeacherPage;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps)(TeacherPage)
