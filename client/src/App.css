@@ -22,18 +22,19 @@
 
   display: grid;
   grid-template-columns: 350px auto;
-  grid-auto-rows: 1fr;
+  grid-template-rows: 1fr;
 }
 
 .body {
   grid-column: 2 / 3;
   grid-row: 1 / -1;
-
-  overflow-y: scroll;
   
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 120px 300px;
+
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 
@@ -72,7 +73,7 @@
 
   cursor: pointer;
   margin-left: auto;
-  margin-top: 4%;
+  margin-top: 3%;
   margin-right: 10%;
 }
 
@@ -95,8 +96,28 @@
 .menu {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
+
   text-align: end;
   margin: 0% auto;
+}
+
+.menu ul {
+  list-style: none;
+}
+
+.menu ul li {
+  margin: 0 5px;
+  padding: 10px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.menu ul li a:hover {
+  color:skyblue;
 }
 
 .GradeCard {
