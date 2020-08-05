@@ -55,16 +55,18 @@ class TeacherPage extends Component {
         return displayCourses
     }
 
-    gradeAverage = (co, skill) => {
+    gradeAverage(co, skill) {
         var grades = 0
         var gradeCount = 0
         var avg = 0
 
         if (co.length > 0) {
             if (skill === "total") {
-                { co.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+                { co.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance))) }
+                { co.map(course => course.ratings.map(rating => gradeCount += 3)) }
             } else {
-                co.forEach((course) => course.ratings.forEach((rating) => grades += rating[skill], gradeCount += 1))
+                co.forEach((course) => course.ratings.forEach((rating) => grades += rating[skill]))
+                co.forEach((course) => course.ratings.forEach((rating) => gradeCount += 1))
             }
 
             avg = grades / gradeCount
