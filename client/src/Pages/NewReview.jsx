@@ -23,7 +23,7 @@ class NewReview extends Component {
             communication: '',
             knowledge: '',
             assistance: '',
-            assignment: '',
+            assignments: '',
             book: '',
             passion: '',
             language: '',
@@ -31,9 +31,9 @@ class NewReview extends Component {
         }
         this.setCourse = this.setCourse.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.ratingChangedKnowledge = this.ratingChangedKnowledge.bind(this)
-        this.ratingChangedAssistance = this.ratingChangedAssistance.bind(this)
-        this.ratingChangedCommunication = this.ratingChangedCommunication.bind(this)
+        this.ratingChanged = this.ratingChanged.bind(this)
+        this.ratingChangedAssignment = this.ratingChangedAssignment.bind(this)
+        this.ratingChangedBook = this.ratingChangedBook.bind(this)
     }
 
     setCourse = (course) => {
@@ -45,14 +45,16 @@ class NewReview extends Component {
         })
     }
 
-    ratingChangedAssistance(newRating) {
-        this.setState({ assistance: newRating })
+    ratingChanged(skill, newRating) {
+        this.setState({ [skill]: newRating })
     }
-    ratingChangedCommunication(newRating) {
-        this.setState({ communication: newRating })
+
+    ratingChangedAssignment(rating) {
+        this.setState({ assignments: rating })
     }
-    ratingChangedKnowledge(newRating) {
-        this.setState({ knowledge: newRating })
+
+    ratingChangedBook(rating) {
+        this.setState({ book: rating })
     }
 
 
@@ -83,16 +85,13 @@ class NewReview extends Component {
             }
 
 
-            const body = JSON.stringify({ communication: this.state.communication, knowledge: this.state.knowledge, assistance: this.state.assistance })
+            const body = JSON.stringify({ communication: this.state.communication, knowledge: this.state.knowledge, assistance: this.state.assistance, assignments: this.state.assignments, book: this.state.book })
 
             console.log("body" + body)
 
-            console.log("absolutt")
             const res = await axios.put('http://localhost:8000/api/studentprofile/' + this.state.teacher._id + '/' + this.state.course.id, body, config)
             //this.showValidationError('email', "User registered")
-            console.log("utpå")
             //console.log(res.data)
-            console.log("skjdfdsjhf")
             this.props.history.push('/SentReview')
 
         } catch (err) {
@@ -115,9 +114,31 @@ class NewReview extends Component {
         var textCourse = ""
         setTextCourse();
 
-        console.log(this.state.course)
+        const setTextAssignment = () => {
+            if (this.state.assignments === "") {
+                textAssignment = "J/N"
+            } else if (this.state.assignments == 1) {
+                textAssignment = "Ja"
+            } else (
+                textAssignment = "Nei"
+            )
+        }
+        var textAssignment = ""
+        setTextAssignment();
 
+        const setTextBook = () => {
+            if (this.state.book === "") {
+                textBook = "J/N"
+            } else if (this.state.book == 1) {
+                textBook = "Ja"
+            } else (
+                textBook = "Nei"
+            )
+        }
+        var textBook = ""
+        setTextBook();
 
+        console.log(this.state.assignments)
         return (
             <div className="App" >
                 <Navbar />
@@ -131,13 +152,25 @@ class NewReview extends Component {
                     <br></br>
                     <h2>Gi din vurdering av foreleseren </h2>
                     <label for="inputKnowledge">Kunnskap
-                    <ReactStars count={6} onChange={this.ratingChangedKnowledge} size={24} activeColor="#1aa054" className="reactStar" /></label>
+                    <ReactStars count={6} onChange={this.ratingChanged.bind(this, "knowledge")} size={24} activeColor="#1aa054" className="reactStar" /></label>
                     <br></br>
                     <label for="inputCommunication">Kommunikasjon
-                    <ReactStars count={6} onChange={this.ratingChangedCommunication} size={24} activeColor="#1aa054" className="reactStar" /></label>
+                    <ReactStars count={6} onChange={this.ratingChanged.bind(this, "communication")} size={24} activeColor="#1aa054" className="reactStar" /></label>
                     <br></br>
                     <label for="inputAssistance">Hjelpsomhet
-                    <ReactStars count={6} onChange={this.ratingChangedAssistance} size={24} activeColor="#1aa054" className="reactStar" /></label>
+                    <ReactStars count={6} onChange={this.ratingChanged.bind(this, "assistance")} size={24} activeColor="#1aa054" className="reactStar" /></label>
+                    <br></br>
+                    <label for="inputAssignment">Var øvingene nyttige?
+                    <DropdownButton className="dropdown" required id="dropdownNewReview" title={textAssignment}>
+                            <Dropdown.Item className="dropdownItemReview" onClick={this.ratingChangedAssignment.bind(this, 1)}>Ja</Dropdown.Item>
+                            <Dropdown.Item className="dropdownItemReview" onClick={this.ratingChangedAssignment.bind(this, 0)}>Nei</Dropdown.Item>
+                        </DropdownButton></label>
+                    <br></br>
+                    <label for="inputBook">Brukte du boken?
+                    <DropdownButton className="dropdown" required id="dropdownNewReview" title={textBook}>
+                            <Dropdown.Item className="dropdownItemReview" onClick={this.ratingChangedBook.bind(this, 1)}>Ja</Dropdown.Item>
+                            <Dropdown.Item className="dropdownItemReview" onClick={this.ratingChangedBook.bind(this, 0)}>Nei</Dropdown.Item>
+                        </DropdownButton></label>
                     <br></br>
                     <input className="submitTeacher" type="submit" value="Send inn"></input>
                 </form>
