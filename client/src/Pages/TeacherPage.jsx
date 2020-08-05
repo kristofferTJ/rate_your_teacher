@@ -82,6 +82,10 @@ class TeacherPage extends Component {
             <div className="App">
                 <Navbar />
                 <div className="teacherPage" >
+                    <div className="sidebar">
+                        <img alt="avatar" src={user.avatar}></img>
+                        <Sidebar/>
+                    </div>
                     <div className="body">
                         <div className="teacherHeader">
                             <div className="teacherInformation">
@@ -94,11 +98,6 @@ class TeacherPage extends Component {
                             <GradeCard courses={courses} id="section1" />
                             <Ratings id="section3" gradeAverage={this.gradeAverage} courses={courses} name={user.name} />
                         </div>
-                    </div>
-
-                    <div className="sidebar">
-                        <img alt="avatar" src={user.avatar}></img>
-                        <Sidebar />
                     </div>
                 </div>
             </div>
