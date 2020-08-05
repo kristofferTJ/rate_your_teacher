@@ -24,8 +24,6 @@ function GradeCard({courses, id}) {
 
             avg = grades / gradeCount
 
-            console.log(avg)
-
             return avg
         } else {
             return 0

@@ -21,7 +21,7 @@ function Ratings({ id, gradeAverage, courses, name }) {
 
     return (
         <Card className="ratingsCard" id={id}>
-            <div className="ratingsCard-header">
+            <div className="ratingsCard-header" >
                 <h1 className="name">{name} sine vurderinger</h1>
                 <Grade grade={gradeAverage(courses, "total")}/>
                 <h4>{ratingsAmount(courses)} vurderinger</h4>
