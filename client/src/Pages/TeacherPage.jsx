@@ -6,6 +6,7 @@ import Ratings from "../Components/Ratings"
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Sidebar from "../Components/Sidebar"
 
 
 class TeacherPage extends Component {
@@ -54,6 +55,26 @@ class TeacherPage extends Component {
         return displayCourses
     }
 
+    gradeAverage = (co, skill) => {
+        var grades = 0
+        var gradeCount = 0
+        var avg = 0
+
+        if (co.length > 0) {
+            if (skill === "total") {
+                { co.map(course => course.ratings.map(rating => grades += (rating.knowledge + rating.communication + rating.assistance), gradeCount += 3)) }
+            } else {
+                co.forEach((course) => course.ratings.forEach((rating) => grades += rating[skill], gradeCount += 1))
+            }
+
+            avg = grades / gradeCount
+
+            return avg
+        } else {
+            return 0
+        }
+    }
+
     render() {
         const { teacher, user, courses } = this.state
 
@@ -61,20 +82,24 @@ class TeacherPage extends Component {
             <div className="App">
                 <Navbar />
                 <div className="teacherPage" >
-                    <img alt="avatar" src={user.avatar}></img>
-                    <div className="teacherInformation">
-                        <h2 >{user.name}</h2>
-                        <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
+                    <div className="body">
+                        <div className="teacherHeader">
+                            <div className="teacherInformation">
+                                <h2 >{user.name}</h2>
+                                <h5 >Underviser {this.displayCourses(courses)} ved {teacher.university}</h5>
+                            </div>
+                            {courses.length > 0 ? <Link className="giVurderingLink" to={{ pathname: '/NewReview', state: { id: this.state.teacher._id } }}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
+                        </div>
+                        <div className="content">
+                            <GradeCard courses={courses} id="section1" />
+                            <Ratings id="section3" gradeAverage={this.gradeAverage} courses={courses} name={user.name} />
+                        </div>
                     </div>
-                    {courses.length > 0 ? <Link className="giVurderingLink" to={{ pathname: '/NewReview', state: { id: this.state.teacher._id } }}><button className="giVurdering">Gi vurdering</button></Link> : <p></p>}
 
-                    <div className="menu">
-                        <h3 className="item1">Karakterkort</h3>
-                        <h3 className="item2">Annen undervisning</h3>
-                        <h3 className="item3">Vurderinger</h3>
+                    <div className="sidebar">
+                        <img alt="avatar" src={user.avatar}></img>
+                        <Sidebar />
                     </div>
-                    <GradeCard courses={courses} />
-                    <Ratings />
                 </div>
             </div>
         )
