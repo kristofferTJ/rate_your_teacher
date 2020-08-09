@@ -117,7 +117,7 @@
 }
 
 .menu ul li a:hover {
-  color:skyblue;
+  color:#2C98F0;
 }
 
 .GradeCard {
@@ -706,6 +706,7 @@ div[class="dropdown-menu show"]{
 
 .newReview h2:first-child{
   padding-top: 15px;
+  margin-bottom: 5px;
 }
 
 #dropdownNewReview{
@@ -736,8 +737,8 @@ div[class="dropdown-menu show"]{
   display: block;
   font-size: 18px;
   padding: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 16.5px;
+  padding-right: 16.5px;
 }
 
 .dropdownItemReview:hover{
@@ -755,6 +756,10 @@ div[class="dropdown-menu show"]{
   margin-bottom: 20px;
 }
 
+.newReview h2{
+  margin-top: 5px;
+}
+
 div[class="undefined react-stars"]{
   margin: auto;
 }
@@ -765,6 +770,11 @@ div[class="undefined react-stars"]:focus{
 
 #inputText{
   height: 120px;
+}
+
+.newReview div[class="dropdownItemReview dropdown-item"]{
+  padding: 10px;
+  background-color: blue;
 }
 
 

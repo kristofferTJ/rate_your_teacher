@@ -8,6 +8,7 @@ import {
 import setAuthToken from './utils/setAuthToken'
 import { loadUser } from './actions/auth'
 import './App.css'
+import PrivateRoute from "./Components/PrivateRoute"
 
 //Pages
 import HomePage from './Pages/HomePage';
@@ -48,11 +49,11 @@ const App = () => {
           <Route exact path='/404' component={NotFoundPage} />
           <Route exact path='/LoggInn' component={Enter} />
           <Route exact path='/TeacherPage' component={TeacherPage} />
-          <Route exact path='/NewTeacher' component={NewTeacherPage} />
+          <PrivateRoute exact path='/NewTeacher' component={NewTeacherPage} />
           <Route exact path='/Request' component={RequestPage} />
           <Route exact path='/OmOss' component={OmOss} />
           <Route exact path='/SentRequest' component={SentRequest} />
-          <Route exact path='/NewReview/' component={NewReview} />
+          <PrivateRoute exact path='/NewReview/' component={NewReview} />
           <Route exact path='/SentReview' component={SentReview} />
           <Route exact path='/Contact' component={Contact} />
           <Route exact path='/RecievedContact' component={RecievedContact} />
