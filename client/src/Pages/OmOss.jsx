@@ -18,6 +18,7 @@ class OmOss extends Component {
 
             <div className="App">
                 <Navbar />
+                <h1>Om oss</h1>
             </div>
         );
     }

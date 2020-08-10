@@ -9,6 +9,7 @@ const TeacherProfile = require('../../models/TeacherProfile');
 const StudentProfile = require('../../models/StudentProfile');
 const User = require('../../models/User');
 const Course = require('../../models/Course');
+const { Mongoose } = require('mongoose');
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -94,7 +95,7 @@ router.put('/:teacher_id/:course_id', auth, async (req, res) => {
     communication,
     knowledge,
     assistance,
-    assignment,
+    assignments,
     book,
     passion,
     looks,
@@ -106,7 +107,7 @@ router.put('/:teacher_id/:course_id', auth, async (req, res) => {
     communication,
     knowledge,
     assistance,
-    assignment,
+    assignments,
     book,
     passion,
     looks,
