@@ -89,67 +89,6 @@ router.get('/', async (req, res) => {
       'name',
       'avatar',
     ]);
-
-    // const teachers = [];
-    // let profile = [];
-    // let course = [];
-    // let cor = {};
-
-    // for (let i = 0; i < profiles.length; i++) {
-    //   arr = [];
-    //   profile = profiles[i];
-    //   for (let j = 0; j < profile.courses.length; j++) {
-    //     course = profile.courses[j];
-    //     //console.log(course);
-    //     cor = await Course.findById(course._id);
-    //     if (cor) {
-    //       let populated = {
-    //         course: cor._id,
-    //         name: cor.name,
-    //         semester: cor.semester,
-    //         coursecode: cor.coursecode,
-    //       };
-    //       arr.push(populated);
-    //       //console.log(arr);
-    //     }
-    //   }
-    //   profile[arr] = arr;
-    //   teachers.push(profile);
-    //   console.log(profile[arr]);
-    // }
-    // console.log(teachers);
-
-    // profiles.forEach((profile) => {
-    //   var coursearray = [];
-    //   profile.coursearray = coursearray;
-    //   profile.courses.forEach(async (course) => {
-    //     var cor = await Course.findOne({ _id: course._id }).select([
-    //       'name',
-    //       'coursecode',
-    //     ]);
-    //     if (cor) {
-    //       var populated = {
-    //         _id: course._id,
-    //         name: cor.name,
-    //         coursecode: cor.coursecode,
-    //       };
-    //       console.log(populated);
-    //       coursearray.unshift(populated);
-    //       console.log(coursearray);
-    //     }
-    //   });
-    //   if (coursearray.length > 0) {
-    //     profile[coursearray] = coursearray;
-    //     console.log(profile);
-    //   }
-
-    //console.log(populated);
-
-    // profile.courses.course = populated;
-    // console.log(profile.courses.course);
-    // console.log(profile.courses);
-    // console.log(profile);
-
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -454,60 +393,5 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     return res.status(500).json({ msg: 'Server error' });
   }
 });
-/*
-// @route   PUT api/profile/experience
-// @desc    Add profile experience
-// @access  Private
 
-router.put(
-  '/experience',
-  [
-    auth,
-    [
-      check('title', 'Title is required').not().isEmpty(),
-      check('company', 'Company is required').not().isEmpty(),
-    ],
-    check('from', 'From date is required').not().isEmpty(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-      title,
-      workplace,
-      location,
-      from,
-      to,
-      current,
-      description,
-    } = req.body;
-
-    const newExp = {
-      title,
-      workplace,
-      location,
-      from,
-      to,
-      current,
-      description,
-    };
-
-    try {
-      const profile = await TeacherProfile.findOne({ user: req.user.id });
-
-      profile.experience.unshift(newExp);
-
-      await profile.save();
-
-      res.json(profile);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
-  }
-);
-*/
 module.exports = router;

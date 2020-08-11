@@ -86,7 +86,7 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
-// @route   DELETE api/studentprofile/:teacher_id/:course_id
+// @route   PUT api/studentprofile/:teacher_id/:course_id
 // @desc    Rate teacher to given course
 // @access  Private
 
